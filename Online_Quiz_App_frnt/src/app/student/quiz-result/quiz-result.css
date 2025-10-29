@@ -1,0 +1,18 @@
+.result-container {
+  text-align: center;
+  color: #fff;
+  background: #0a0f1a;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+button {
+  background: #00aaff;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 8px;
+  margin-top: 20px;
+}

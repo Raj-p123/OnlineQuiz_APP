@@ -1,0 +1,14 @@
+<div *ngIf="questions.length">
+  <h3>Question {{ currentIndex + 1 }} / {{ questions.length }}</h3>
+  <p>{{ questions[currentIndex]?.question }}</p>
+
+  <div>
+    <label *ngFor="let opt of questions[currentIndex]?.options">
+      <input type="radio" name="opt" (change)="selectOption(opt)" [checked]="selectedAnswer===opt" /> {{ opt }}
+    </label>
+  </div>
+
+  <p>Time left: {{ remaining }}s</p>
+
+  <button (click)="next()">Next</button>
+</div>

@@ -1,0 +1,14 @@
+<div class="manage-quiz">
+  <button class="add-btn" (click)="openAddQuiz()">+ Add New Quiz</button>
+
+  <div *ngFor="let quiz of quizzes" class="quiz-card">
+    <h4>{{ quiz.title }}</h4>
+    <p>{{ quiz.description }}</p>
+    <div class="actions">
+      <button (click)="editQuiz(quiz)">Edit</button>
+      <button class="delete" (click)="deleteQuiz(quiz.id)">Delete</button>
+    </div>
+  </div>
+
+  <app-add-quiz *ngIf="showAddForm" (quizAdded)="onQuizAdded($event)"></app-add-quiz>
+</div>

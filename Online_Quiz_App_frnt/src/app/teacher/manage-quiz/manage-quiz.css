@@ -1,0 +1,42 @@
+.manage-quiz {
+  background: #101828;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 132, 255, 0.2);
+}
+
+.quiz-card {
+  background: #1e293b;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  background: #00aaff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+button.delete {
+  background: #ff4747;
+}
+
+button.delete:hover {
+  background: #d32f2f;
+}
+
+.add-btn {
+  margin-bottom: 15px;
+  background: #007bff;
+}

@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a routerLink="/">Online Quiz App</a>
+    </div>
+    <div class="navbar-menu">
+      <div *ngIf="!isLoggedIn" class="navbar-links">
+        <a routerLink="/login" class="btn btn-primary">Login</a>
+        <a routerLink="/register" class="btn btn-secondary">Register</a>
+      </div>
+      <div *ngIf="isLoggedIn" class="navbar-links">
+        <div *ngIf="userRole === 'STUDENT'">
+          <a routerLink="/student/dashboard" class="btn btn-link">Dashboard</a>
+          <a routerLink="/student/quiz-list" class="btn btn-link">Quiz List</a>
+        </div>
+        <div *ngIf="userRole === 'TEACHER'">
+          <a routerLink="/teacher/dashboard" class="btn btn-link">Dashboard</a>
+          <a routerLink="/teacher/manage-quiz" class="btn btn-link">Manage Quiz</a>
+          <a routerLink="/teacher/add-quiz" class="btn btn-link">Add Quiz</a>
+          <a routerLink="/teacher/add-question" class="btn btn-link">Add Question</a>
+          <a routerLink="/teacher/view-result" class="btn btn-link">View Result</a>
+        </div>
+        <div *ngIf="userRole === 'ADMIN'">
+          <a routerLink="/admin/dashboard" class="btn btn-link">Dashboard</a>
+          <a routerLink="/admin/manage-user" class="btn btn-link">Manage User</a>
+          <a routerLink="/admin/manage-quiz" class="btn btn-link">Manage Quiz</a>
+        </div>
+        <button (click)="logout()" class="btn btn-danger">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>

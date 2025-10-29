@@ -1,0 +1,43 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Create Account</h2>
+    <p>Register to start your journey</p>
+
+    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+      <div class="form-group">
+        <input
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          [(ngModel)]="registerData.name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          [(ngModel)]="registerData.email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          [(ngModel)]="registerData.password"
+          required
+        />
+      </div>
+
+      <button type="submit" [disabled]="!registerForm.valid">Register</button>
+      <p class="link">
+        Already have an account? <a routerLink="/login">Login</a>
+      </p>
+    </form>
+  </div>
+</div>

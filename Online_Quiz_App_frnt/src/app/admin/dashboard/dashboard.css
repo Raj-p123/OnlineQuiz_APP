@@ -1,0 +1,50 @@
+.admin-dashboard {
+  background: #0a0f1a;
+  color: white;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  background: #007bff;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.admin-content {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  flex: 1;
+  background: #101828;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: #1e293b;
+  transform: translateY(-5px);
+}
+
+.section {
+  margin-top: 2rem;
+}

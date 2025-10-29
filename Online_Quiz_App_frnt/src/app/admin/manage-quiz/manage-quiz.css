@@ -1,0 +1,35 @@
+.manage-quizzes {
+  background: #101828;
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+th {
+  color: #00aaff;
+  text-align: left;
+}
+
+button.delete {
+  background: #ff4747;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+button.delete:hover {
+  background: #d32f2f;
+}

@@ -1,0 +1,29 @@
+.student-dashboard {
+  background: #0a0f1a;
+  color: #fff;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  background: #007bff;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.quiz-section {
+  margin-top: 30px;
+}

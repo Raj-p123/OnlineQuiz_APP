@@ -1,0 +1,11 @@
+<div class="quiz-list">
+  <h2>Available Quizzes</h2>
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="!loading && quizzes.length===0">No quizzes found.</div>
+
+  <div *ngFor="let q of quizzes" class="quiz-card">
+    <h4>{{ q.title }}</h4>
+    <p>{{ q.description }}</p>
+    <button (click)="startQuiz(q)">Start</button>
+  </div>
+</div>

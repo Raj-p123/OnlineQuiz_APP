@@ -1,0 +1,28 @@
+.play-quiz {
+  color: white;
+  background: #0a0f1a;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.question {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.options button {
+  display: block;
+  width: 60%;
+  margin: 10px auto;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.options button:hover {
+  background: #0062cc;
+}

@@ -1,0 +1,21 @@
+<div class="admin-dashboard">
+  <div class="header">
+    <h2>Admin Dashboard</h2>
+    <button (click)="logout()">Logout</button>
+  </div>
+
+  <div class="admin-content">
+    <div class="card" (click)="showSection('users')">
+      <h3>👤 Manage Users</h3>
+    </div>
+
+    <div class="card" (click)="showSection('quizzes')">
+      <h3>📝 Manage Quizzes</h3>
+    </div>
+  </div>
+
+  <div class="section">
+    <app-manage-user *ngIf="activeSection === 'users'"></app-manage-user>
+    <app-manage-quiz *ngIf="activeSection === 'quizzes'"></app-manage-quiz>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Welcome Back</h2>
+    <p>Login to continue</p>
+
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="form-group">
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          [(ngModel)]="loginData.email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          [(ngModel)]="loginData.password"
+          required
+        />
+      </div>
+
+      <button type="submit" [disabled]="!loginForm.valid">Login</button>
+      <p class="link">
+        Don’t have an account? <a routerLink="/register">Register</a>
+      </p>
+    </form>
+  </div>
+</div>

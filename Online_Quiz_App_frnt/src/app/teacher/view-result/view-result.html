@@ -1,0 +1,15 @@
+<div class="view-result">
+  <h2>Quiz Results</h2>
+  <div *ngIf="results.length === 0">
+    <p>No results available yet.</p>
+  </div>
+  <div *ngIf="results.length > 0">
+    <div *ngFor="let result of results" class="result-card">
+      <h3>{{ result.studentName }}</h3>
+      <p>Quiz: {{ result.quizTitle }}</p>
+      <p>Score: {{ result.score }} / {{ result.totalQuestions }}</p>
+      <p>Percentage: {{ (result.score / result.totalQuestions * 100) | number:'1.0-0' }}%</p>
+      <p>Date: {{ result.date | date:'short' }}</p>
+    </div>
+  </div>
+</div>
