@@ -1,42 +1,61 @@
 <div class="auth-container">
   <div class="auth-card">
-    <h2>Create Account</h2>
-    <p>Register to start your journey</p>
+    <h2 class="title">Create Account</h2>
+    <p class="subtitle">Register to start your journey 🚀</p>
 
     <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+      <!-- Full Name -->
       <div class="form-group">
         <input
           type="text"
           name="name"
-          placeholder="Full Name"
+          placeholder="👤 Full Name"
           [(ngModel)]="registerData.name"
           required
         />
       </div>
 
+      <!-- Email -->
       <div class="form-group">
         <input
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="📧 Email Address"
           [(ngModel)]="registerData.email"
           required
         />
       </div>
 
+      <!-- Password -->
       <div class="form-group">
         <input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="🔑 Password"
           [(ngModel)]="registerData.password"
           required
         />
       </div>
 
-      <button type="submit" [disabled]="!registerForm.valid">Register</button>
+      <!-- Role Dropdown -->
+      <div class="form-group">
+        <select name="role" [(ngModel)]="registerData.role" required>
+          <option value="" disabled selected>Select Role</option>
+          <option value="student">🎓 Student</option>
+          <option value="teacher">👩‍🏫 Teacher</option>
+          <option value="admin">🛠️ Admin</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="!registerForm.valid">
+        Register
+      </button>
+
+      <!-- Login Link -->
       <p class="link">
-        Already have an account? <a routerLink="/login">Login</a>
+        Already have an account?
+        <a routerLink="/auth/login">Login</a>
       </p>
     </form>
   </div>

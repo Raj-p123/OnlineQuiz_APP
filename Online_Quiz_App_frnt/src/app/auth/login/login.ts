@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
@@ -22,22 +23,25 @@ export class LoginComponent {
 
   onLogin() {
     this.auth.login(this.loginData).subscribe({
-      next: (response) => {
-        alert('Login Successful!');
-        const role = response.role;
-        if (role === 'STUDENT') {
+      next: (res) => {
+        alert('✅ Login Successful!');
+
+        const role = res.role?.toLowerCase();
+
+        // ✅ Redirect based on role
+        if (role === 'student') {
           this.router.navigate(['/student/dashboard']);
-        } else if (role === 'TEACHER') {
+        } else if (role === 'teacher') {
           this.router.navigate(['/teacher/dashboard']);
-        } else if (role === 'ADMIN') {
+        } else if (role === 'admin') {
           this.router.navigate(['/admin/dashboard']);
         } else {
-          this.router.navigate(['/home']);
+          alert('Role not recognized!');
         }
       },
-      error: (error) => {
-        alert('Invalid Credentials');
-        console.error('Login error:', error);
+      error: (err) => {
+        console.error('Login failed:', err);
+        alert('❌ Invalid credentials');
       }
     });
   }

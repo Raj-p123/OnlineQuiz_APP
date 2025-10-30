@@ -1,32 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../student.service';
-import { Router } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
+import { StudentService, Quiz } from '../student.service';
 
 @Component({
-  selector: 'app-dashboard',
-  imports: [],
+  selector: 'app-student-dashboard',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css'
+  styleUrls: ['./dashboard.css']
 })
+export class StudentDashboardComponent implements OnInit {
+  quizzes: Quiz[] = [];
+  loading = true;
 
-
-export class DashboardComponent implements OnInit {
-  username = '';
-  quizCount = 0;
-
-  constructor(private studentService: StudentService, private router: Router) {}
+  constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
-    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    this.username = user.name || 'Student';
-    this.studentService.getQuizCount().subscribe({
-      next: count => this.quizCount = count,
-      error: _ => this.quizCount = 0
+    this.studentService.getAllQuizzes().subscribe({
+      next: (data) => {
+        this.quizzes = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Failed to fetch quizzes:', err);
+        this.loading = false;
+      }
     });
-  }
-
-  goToList() {
-    this.router.navigate(['/student/quiz-list']);
   }
 }

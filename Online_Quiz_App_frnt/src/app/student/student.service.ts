@@ -22,23 +22,28 @@ export interface Question {
   providedIn: 'root'
 })
 export class StudentService {
-  private baseUrl = 'http://localhost:8080/api/student';
+  // 👇 update base URL to your backend endpoint
+  private baseUrl = 'http://localhost:8080/online_quiz_db/api/quiz';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  // Fetch all quizzes
   getAllQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(`${this.baseUrl}/quizzes`);
+  return this.http.get<Quiz[]>(this.baseUrl);
   }
 
+  // Fetch questions for a specific quiz
   getQuestions(quizId: number): Observable<Question[]> {
-    return this.http.get<Question[]>(`${this.baseUrl}/quiz/${quizId}/questions`);
+    return this.http.get<Question[]>(`${this.baseUrl}/${quizId}/questions`);
   }
 
+  // Optional: count quizzes
   getQuizCount(): Observable<number> {
-    return this.http.get<number>(`${this.baseUrl}/quizzes/count`);
+    return this.http.get<number>(`${this.baseUrl}/count`);
   }
 
-  submitAnswers(quizId: number, payload: { answers: { questionId:number, selected:string }[] }) {
-    return this.http.post(`${this.baseUrl}/quiz/${quizId}/submit`, payload);
+  // Submit quiz answers
+  submitAnswers(quizId: number, payload: { answers: { questionId: number; selected: string }[] }) {
+    return this.http.post(`${this.baseUrl}/${quizId}/submit`, payload);
   }
 }

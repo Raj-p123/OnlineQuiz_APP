@@ -1,10 +1,17 @@
-<div class="dashboard">
-  <h2>Welcome, {{ username }}</h2>
-  <div class="stats">
-    <div class="card">
-      <h3>{{ quizCount }}</h3>
-      <p>Quizzes available</p>
+<div class="dashboard-container">
+  <h2>📚 Available Quizzes</h2>
+
+  <div *ngIf="loading" class="loading">Loading quizzes...</div>
+
+  <div *ngIf="!loading && quizzes.length > 0" class="quiz-list">
+    <div class="quiz-card" *ngFor="let quiz of quizzes">
+      <h3>{{ quiz.title }}</h3>
+      <p>{{ quiz.description }}</p>
+      <button>Start Quiz</button>
     </div>
   </div>
-  <button (click)="goToList()">View Quizzes</button>
+
+  <div *ngIf="!loading && quizzes.length === 0" class="no-data">
+    No quizzes available.
+  </div>
 </div>
