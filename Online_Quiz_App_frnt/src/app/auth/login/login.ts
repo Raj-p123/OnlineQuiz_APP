@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,10 +9,8 @@ import { AuthService } from '../auth.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
-
-
 export class LoginComponent {
   loginData = {
     email: '',
@@ -26,9 +24,13 @@ export class LoginComponent {
       next: (res) => {
         alert('✅ Login Successful!');
 
+        // Store student's name for personalized welcome
+        if(res.name) {
+          localStorage.setItem('studentName', res.name);
+        }
+
         const role = res.role?.toLowerCase();
 
-        // ✅ Redirect based on role
         if (role === 'student') {
           this.router.navigate(['/student/dashboard']);
         } else if (role === 'teacher') {

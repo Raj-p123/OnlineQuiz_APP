@@ -1,17 +1,22 @@
-<div class="dashboard-container">
-  <h2>📚 Available Quizzes</h2>
+<div class="dashboard-header">
+</div>
 
-  <div *ngIf="loading" class="loading">Loading quizzes...</div>
+<!-- Personalized welcome message -->
+<div class="welcome-section" *ngIf="studentName">
+  <h3>Welcome, {{ studentName }}!</h3>
+</div>
 
-  <div *ngIf="!loading && quizzes.length > 0" class="quiz-list">
-    <div class="quiz-card" *ngFor="let quiz of quizzes">
-      <h3>{{ quiz.title }}</h3>
-      <p>{{ quiz.description }}</p>
-      <button>Start Quiz</button>
-    </div>
+<div class="dashboard-main-cards">
+  <div class="nav-card" (click)="goToTakeQuiz()">
+    <h3>Take Quiz</h3>
+    <p>Attempt new quizzes available for you.</p>
   </div>
-
-  <div *ngIf="!loading && quizzes.length === 0" class="no-data">
-    No quizzes available.
+  <div class="nav-card" (click)="goToLeaderboard()">
+    <h3>Leaderboard</h3>
+    <p>See your rank among peers.</p>
+  </div>
+  <div class="nav-card" (click)="goToQuizHistory()">
+    <h3>Quiz History</h3>
+    <p>Review your previous quiz attempts.</p>
   </div>
 </div>
