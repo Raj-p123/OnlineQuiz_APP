@@ -2,25 +2,29 @@ package com.onlineQuiz.online_Quiz_App.auth.model;
 
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "questions")
 public class Question {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="quiz_id")
+    @Column(name = "quiz_id")
     private Long quizId;
 
-    @Column(length = 1000)
+    @Column(name = "question_text")
     private String questionText;
 
-    @Column(length = 1000)
-    private String optionsJson; // store as JSON array string
+    @Lob
+    @Column(name = "options_json", columnDefinition = "TEXT")
+    private String optionsJson;  // JSON array of options
 
-    private String correctOption; // stored hashed/clear — but not sent to client
+    @Column(name = "correct_option")
+    private String correctOption;
 
+    // ✅ Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -36,4 +40,3 @@ public class Question {
     public String getCorrectOption() { return correctOption; }
     public void setCorrectOption(String correctOption) { this.correctOption = correctOption; }
 }
-

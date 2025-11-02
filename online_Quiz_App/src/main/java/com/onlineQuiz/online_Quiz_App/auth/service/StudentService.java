@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class StudentService {
 
-    @Autowired private QuizRepository quizRepo;
+    @Autowired private QuizRepository quizRepo;The method getOptionsJson() is undefined for the type Question
     @Autowired private QuestionRepository questionRepo;
     @Autowired private ObjectMapper objectMapper;
 

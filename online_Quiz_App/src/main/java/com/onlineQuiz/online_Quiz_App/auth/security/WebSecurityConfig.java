@@ -29,6 +29,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
             .authorizeHttpRequests()
             .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/quiz/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .cors();
