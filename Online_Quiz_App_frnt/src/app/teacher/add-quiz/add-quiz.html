@@ -1,19 +1,55 @@
-<div class="add-quiz-form">
-  <h3>Add New Quiz</h3>
-  <form (ngSubmit)="addQuiz()" #quizForm="ngForm">
+<div class="add-quiz-container">
+  <h2>📝 Create New Quiz</h2>
+
+  <form (ngSubmit)="addQuiz()">
+    <!-- Quiz Info -->
     <div class="form-group">
-      <input type="text" name="title" placeholder="Quiz Title" [(ngModel)]="quiz.title" required />
+      <input type="text" [(ngModel)]="quiz.title" name="title" placeholder="Quiz Title" required />
     </div>
 
     <div class="form-group">
-      <textarea
-        name="description"
-        placeholder="Quiz Description"
-        [(ngModel)]="quiz.description"
-        required
-      ></textarea>
+      <textarea [(ngModel)]="quiz.description" name="description" placeholder="Quiz Description" required></textarea>
     </div>
 
-    <button type="submit" [disabled]="!quizForm.valid">Add Quiz</button>
+    <hr />
+
+    <!-- Question Section -->
+    <h3>➕ Add Question</h3>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="question.text" name="questionText" placeholder="Enter question" required />
+    </div>
+
+    <div class="form-group">
+      <input type="text" [(ngModel)]="question.option1" name="option1" placeholder="Option 1" required />
+      <input type="text" [(ngModel)]="question.option2" name="option2" placeholder="Option 2" required />
+      <input type="text" [(ngModel)]="question.option3" name="option3" placeholder="Option 3" required />
+      <input type="text" [(ngModel)]="question.option4" name="option4" placeholder="Option 4" required />
+    </div>
+
+    <div class="form-group">
+      <label>✅ Correct Answer:</label>
+      <select [(ngModel)]="question.correctAnswer" name="correctAnswer" required>
+        <option value="" disabled>Select correct answer</option>
+        <option *ngFor="let opt of [question.option1, question.option2, question.option3, question.option4]" [value]="opt">
+          {{ opt }}
+        </option>
+      </select>
+    </div>
+
+    <button type="button" (click)="addQuestion()">Add Question ➕</button>
+
+    <div *ngIf="quiz.questions.length > 0" class="question-list">
+      <h4>📋 Added Questions:</h4>
+      <ul>
+        <li *ngFor="let q of quiz.questions">
+          <strong>{{ q.text }}</strong> — ✅ {{ q.correctAnswer }}
+        </li>
+      </ul>
+    </div>
+
+    <hr />
+
+    <button type="submit" class="save-btn">💾 Save Quiz</button>
   </form>
 </div>

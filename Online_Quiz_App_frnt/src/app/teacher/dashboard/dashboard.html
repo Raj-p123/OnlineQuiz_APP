@@ -1,11 +1,31 @@
 <div class="teacher-dashboard">
-  <div class="header">
+  <header class="header">
     <h2>Welcome, {{ teacherName }}</h2>
-    <button (click)="logout()">Logout</button>
-  </div>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </header>
 
-  <div class="content">
-    <h3>Manage Your Quizzes</h3>
-    <app-manage-quiz></app-manage-quiz>
-  </div>
+  <main class="dashboard">
+    <section class="card">
+      <h3>👤 Profile Info</h3>
+      <p><strong>Name:</strong> {{ teacherName }}</p>
+    </section>
+
+    <section class="card">
+      <h3>📝 Create Quiz</h3>
+      <p>Start creating new quizzes for your students.</p>
+      <button (click)="goToAddQuiz()" class="create-btn">Create Quiz</button>
+    </section>
+
+    <section class="card">
+      <h3>📚 Manage Quizzes</h3>
+      <p>View and edit your existing quizzes.</p>
+      <button (click)="goToManageQuiz()" class="btn">Manage Quizzes</button>
+    </section>
+
+    <section class="card">
+      <h3>📊 View Results</h3>
+      <p>Check the performance of students in your quizzes.</p>
+      <button class="btn">View Results</button>
+    </section>
+  </main>
 </div>

@@ -1,25 +1,34 @@
 package com.onlineQuiz.online_Quiz_App.auth.model;
 
 
+
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "quizzes")
 public class Quiz {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
-    @Column(length = 1000)
     private String description;
     private String createdBy;
     private Integer durationSeconds; // optional
     private String category;
 
 
-    // no cascade fetch for questions here in simple setup
-    // getters & setters
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Question> questions = new ArrayList<>();
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
     public String getCategory() {
 		return category;
@@ -30,15 +39,27 @@ public class Quiz {
 	public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+	public String getDescription() {
+		return description;
+	}
 
-    public String getCreatedBy() { return createdBy; }
-    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Integer getDurationSeconds() { return durationSeconds; }
-    public void setDurationSeconds(Integer durationSeconds) { this.durationSeconds = durationSeconds; }
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+    
+    
+    // getters & setters
 }

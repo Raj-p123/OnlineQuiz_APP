@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TeacherService } from '../teacher.service';
 import { AddQuizComponent } from '../add-quiz/add-quiz';
+import { QuizService } from '../quiz.service';
 
 @Component({
   selector: 'app-manage-quiz',
@@ -11,35 +12,23 @@ import { AddQuizComponent } from '../add-quiz/add-quiz';
   styleUrl: './manage-quiz.css'
 })
 
+export class ManageQuizComponent implements OnInit {
+  quizzes: any[] = [];
 
-export class ManageQuizComponent {
-  quizzes: any[] = JSON.parse(localStorage.getItem('teacherQuizzes') || '[]');
-  showAddForm = false;
+  constructor(private quizService: QuizService) {}
 
-  openAddQuiz() {
-    this.showAddForm = true;
+  ngOnInit() {
+    this.loadQuizzes();
   }
 
-  onQuizAdded(newQuiz: any) {
-    this.quizzes.push(newQuiz);
-    localStorage.setItem('teacherQuizzes', JSON.stringify(this.quizzes));
-    this.showAddForm = false;
-  }
-
-  editQuiz(quiz: any) {
-    const updatedTitle = prompt('Edit quiz title:', quiz.title);
-    const updatedDesc = prompt('Edit quiz description:', quiz.description);
-    if (updatedTitle && updatedDesc) {
-      quiz.title = updatedTitle;
-      quiz.description = updatedDesc;
-      localStorage.setItem('teacherQuizzes', JSON.stringify(this.quizzes));
-    }
-  }
-
-  deleteQuiz(id: number) {
-    if (confirm('Are you sure you want to delete this quiz?')) {
-      this.quizzes = this.quizzes.filter(q => q.id !== id);
-      localStorage.setItem('teacherQuizzes', JSON.stringify(this.quizzes));
-    }
+  loadQuizzes() {
+    this.quizService.getAllQuizzes().subscribe({
+      next: (data) => {
+        this.quizzes = data;
+      },
+      error: (err) => {
+        console.error('Error fetching quizzes:', err);
+      }
+    });
   }
 }

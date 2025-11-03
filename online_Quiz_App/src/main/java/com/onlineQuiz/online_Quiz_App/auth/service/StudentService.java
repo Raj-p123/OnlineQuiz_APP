@@ -2,13 +2,13 @@ package com.onlineQuiz.online_Quiz_App.auth.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.onlineQuiz.online_Quiz_App.DTO.QuestionDto;
 import com.onlineQuiz.online_Quiz_App.auth.model.Question;
 import com.onlineQuiz.online_Quiz_App.auth.model.Quiz;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuestionRepository;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuizRepository;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,18 +24,20 @@ public class StudentService {
 
     // Fetch questions by quiz ID
     public List<QuestionDto> getQuestionsForQuiz(Long quizId) {
-        List<Question> qs = questionRepo.findByQuizId(quizId);
-        return qs.stream().map(q -> {
+        List<Question> questions = questionRepo.findByQuizId(quizId);
+
+        return questions.stream().map(q -> {
             QuestionDto dto = new QuestionDto();
             dto.setId(q.getId());
-            dto.setQuizId(q.getQuizId());
-            dto.setQuestion(q.getQuestionText());
-            try {
-                List<String> opts = objectMapper.readValue(q.getOptionsJson(), List.class);
-                dto.setOptions(opts);
-            } catch (Exception ex) {
-                dto.setOptions(List.of());
-            }
+            dto.setQuizId(q.getQuiz().getId());
+            dto.setQuestion(q.getText());
+            dto.setOptions(List.of(
+                q.getOption1(),
+                q.getOption2(),
+                q.getOption3(),
+                q.getOption4()
+            ));
+            dto.setCorrectAnswer(q.getCorrectAnswer());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -87,10 +89,14 @@ public class StudentService {
             Collectors.toMap(Question::getId, Question::getCorrectOption));
         int total = qs.size();
         int score = 0;
+
         for (AnswerPayload a : answers) {
             String correct = correctMap.get(a.getQuestionId());
-            if (correct != null && correct.equals(a.getSelected())) score++;
+            if (correct != null && correct.equalsIgnoreCase(a.getSelected())) {
+                score++;
+            }
         }
+
         GradingResult result = new GradingResult();
         result.setScore(score);
         result.setTotal(total);
