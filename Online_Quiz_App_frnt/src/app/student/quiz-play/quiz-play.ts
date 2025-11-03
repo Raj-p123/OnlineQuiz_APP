@@ -7,19 +7,17 @@ import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quiz-play',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './quiz-play.html',
   styleUrl: './quiz-play.css'
 })
-
-
 export class PlayQuizComponent implements OnInit, OnDestroy {
-  quizId!: number;
+  category!: string;
   questions: Question[] = [];
   currentIndex = 0;
   selectedAnswer: string | null = null;
-  answers: { questionId:number, selected:string }[] = [];
-  timerSeconds = 0;
+  answers: { questionId: number, selected: string }[] = [];
   perQuestionSeconds = 60;
   timerSub?: Subscription;
   remaining = 0;
@@ -31,17 +29,15 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.quizId = Number(this.route.snapshot.paramMap.get('id'));
-    this.studentService.getQuestions(this.quizId).subscribe({
-      next: qs => {
+    this.category = this.route.snapshot.paramMap.get('category') || '';
+    this.studentService.getQuestionsByCategory(this.category).subscribe({
+      next: (qs: Question[]) => {
         this.questions = qs;
-        // If quiz has duration, set perQuestionSeconds from quiz (optional)
         this.startQuestionTimer();
       }
     });
   }
 
-  // start timer for question
   startQuestionTimer() {
     this.remaining = this.perQuestionSeconds;
     this.timerSub = interval(1000).subscribe(() => {
@@ -57,11 +53,9 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    // record answer (even if null)
     const q = this.questions[this.currentIndex];
     this.answers.push({ questionId: q.id, selected: this.selectedAnswer || '' });
 
-    // reset and go to next question
     this.selectedAnswer = null;
     this.currentIndex++;
     if (this.currentIndex >= this.questions.length) {
@@ -73,13 +67,11 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
 
   finish() {
     this.timerSub?.unsubscribe();
-    this.studentService.submitAnswers(this.quizId, { answers: this.answers }).subscribe({
+    this.studentService.submitAnswers(this.category, { answers: this.answers }).subscribe({
       next: (res: any) => {
-        // backend might return score and details
         this.router.navigate(['/student/result'], { state: res });
       },
       error: _ => {
-        // fallback: navigate and show message
         this.router.navigate(['/student/result'], { state: { score: 0, total: this.questions.length }});
       }
     });

@@ -1,0 +1,37 @@
+<div class="category-header">
+  <h2>Choose Your Quiz Category</h2>
+</div>
+
+<div class="category-grid">
+  <div class="category-card" (click)="startQuiz('verbal-reasoning')">
+    <h3>Verbal Reasoning</h3>
+    <p>Practice comprehension and language skills.</p>
+  </div>
+  <div class="category-card" (click)="startQuiz('quantitative-aptitude')">
+    <h3>Quantitative Aptitude</h3>
+    <p>Sharpen your numeric and calculation ability.</p>
+  </div>
+  <div class="category-card" (click)="startQuiz('logical-reasoning')">
+    <h3>Logical Reasoning</h3>
+    <p>Challenge your problem-solving and logical skills.</p>
+  </div>
+  <div class="category-card" (click)="startQuiz('data-interpretation')">
+    <h3>Data Interpretation</h3>
+    <p>Test your skill in reading and analyzing data.</p>
+  </div>
+  <div class="category-card" (click)="startQuiz('general-knowledge')">
+    <h3>General Knowledge</h3>
+    <p>Expand your awareness of the world.</p>
+  </div>
+  <div class="category-card" (click)="startQuiz('technical-mcq')">
+    <h3>Technical MCQs</h3>
+    <p>Test yourself on technical and subject-based topics.</p>
+  </div>
+  <!-- Add more categories as you wish -->
+
+  <!-- Coming Soon card (non-clickable) -->
+  <div class="category-card coming-soon">
+    <h3>Coming Soon</h3>
+    <p>More quiz categories will be available soon.</p>
+  </div>
+</div>
