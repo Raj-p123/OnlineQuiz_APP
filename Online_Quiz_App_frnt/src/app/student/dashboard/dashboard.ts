@@ -20,7 +20,7 @@ export class StudentDashboardComponent implements OnInit {
   ngOnInit(): void {}
 
   goToTakeQuiz() {
-    this.router.navigate(['/student/quiz-list']);
+    this.router.navigate(['/student/quiz-category']);
   }
 
   goToLeaderboard() {

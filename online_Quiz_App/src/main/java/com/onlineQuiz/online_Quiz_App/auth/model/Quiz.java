@@ -14,6 +14,10 @@ public class Quiz {
 
     private String title;
     private String description;
+    private String createdBy;
+    private Integer durationSeconds; // optional
+    private String category;
+
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions = new ArrayList<>();
@@ -26,9 +30,14 @@ public class Quiz {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+    public String getCategory() {
+		return category;
 	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
 	public void setTitle(String title) {
 		this.title = title;
