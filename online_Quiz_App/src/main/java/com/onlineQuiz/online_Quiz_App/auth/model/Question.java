@@ -6,37 +6,46 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "questions")
 public class Question {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "quiz_id")
-    private Long quizId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
 
-    @Column(name = "question_text")
-    private String questionText;
+    @Column(length = 2000)
+    private String text;
 
-    @Lob
-    @Column(name = "options_json", columnDefinition = "TEXT")
-    private String optionsJson;  // JSON array of options
+    private String option1;
+    private String option2;
+    private String option3;
+    private String option4;
 
-    @Column(name = "correct_option")
-    private String correctOption;
+    private String correctAnswer;
 
-    // ✅ Getters & Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // getters & setters
+    public Long getId(){ return id; }
+    public void setId(Long id){ this.id = id; }
 
-    public Long getQuizId() { return quizId; }
-    public void setQuizId(Long quizId) { this.quizId = quizId; }
+    public Quiz getQuiz(){ return quiz; }
+    public void setQuiz(Quiz q){ this.quiz = q; }
 
-    public String getQuestionText() { return questionText; }
-    public void setQuestionText(String questionText) { this.questionText = questionText; }
+    public String getText(){ return text; }
+    public void setText(String t){ this.text = t; }
 
-    public String getOptionsJson() { return optionsJson; }
-    public void setOptionsJson(String optionsJson) { this.optionsJson = optionsJson; }
+    public String getOption1(){ return option1; }
+    public void setOption1(String o){ this.option1 = o; }
 
-    public String getCorrectOption() { return correctOption; }
-    public void setCorrectOption(String correctOption) { this.correctOption = correctOption; }
+    public String getOption2(){ return option2; }
+    public void setOption2(String o){ this.option2 = o; }
+
+    public String getOption3(){ return option3; }
+    public void setOption3(String o){ this.option3 = o; }
+
+    public String getOption4(){ return option4; }
+    public void setOption4(String o){ this.option4 = o; }
+
+    public String getCorrectAnswer(){ return correctAnswer; }
+    public void setCorrectAnswer(String c){ this.correctAnswer = c; }
 }
