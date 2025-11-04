@@ -23,9 +23,10 @@ export class QuizService {
 
   constructor(private http: HttpClient) {}
 
-  addQuiz(payload: QuizRequest): Observable<any> {
-    return this.http.post(`${this.baseUrl}/add`, payload);
-  }
+  addQuiz(quizData: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}/add`, quizData, { responseType: 'text' });
+}
+
 
   getAllQuizzes() {
     return this.http.get<any[]>(`${this.baseUrl}/all`);

@@ -1,42 +1,25 @@
-.manage-quiz {
-  background: #101828;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0, 132, 255, 0.2);
+table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-.quiz-card {
-  background: #1e293b;
-  color: white;
-  padding: 1rem;
-  border-radius: 10px;
-  margin-top: 1rem;
+th {
+  background-color: #0a1a2f;
+  color: #00bfff;
 }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
+td,
+th {
+  vertical-align: middle;
 }
 
 button {
-  background: #00aaff;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 8px;
-  cursor: pointer;
+  margin-right: 5px;
+}
+
+input.form-control {
+  background-color: #1e1e1e;
   color: white;
-}
-
-button.delete {
-  background: #ff4747;
-}
-
-button.delete:hover {
-  background: #d32f2f;
-}
-
-.add-btn {
-  margin-bottom: 15px;
-  background: #007bff;
+  border: 1px solid #00bfff;
 }

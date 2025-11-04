@@ -1,33 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TeacherService } from '../teacher.service';
-import { AddQuizComponent } from '../add-quiz/add-quiz';
-import { QuizService } from '../quiz.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-manage-quiz',
-  imports: [CommonModule, FormsModule, AddQuizComponent],
+  standalone: true,
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './manage-quiz.html',
-  styleUrl: './manage-quiz.css'
+  styleUrls: ['./manage-quiz.css'] // ✅ fixed "styleUrls" spelling
 })
 
 export class ManageQuizComponent implements OnInit {
   quizzes: any[] = [];
+  editingQuiz: any = null;
+  apiUrl = 'http://localhost:8080/online_quiz_db/api/quiz';
 
-  constructor(private quizService: QuizService) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.loadQuizzes();
   }
 
   loadQuizzes() {
-    this.quizService.getAllQuizzes().subscribe({
+    this.http.get<any[]>(`${this.apiUrl}/all`).subscribe({
       next: (data) => {
+        console.log('✅ Quizzes loaded:', data);
         this.quizzes = data;
       },
       error: (err) => {
-        console.error('Error fetching quizzes:', err);
+        console.error('❌ Failed to fetch quizzes:', err);
+        alert('⚠️ Failed to load quizzes. Check backend or network.');
       }
     });
   }

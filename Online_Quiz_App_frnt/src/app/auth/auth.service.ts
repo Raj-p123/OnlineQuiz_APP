@@ -45,7 +45,7 @@ export class AuthService {
       localStorage.removeItem('role');
     }
     this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/login']);
   }
 
   // 🔹 Token helpers

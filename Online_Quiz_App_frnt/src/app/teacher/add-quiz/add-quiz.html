@@ -4,11 +4,42 @@
   <form (ngSubmit)="addQuiz()">
     <!-- Quiz Info -->
     <div class="form-group">
-      <input type="text" [(ngModel)]="quiz.title" name="title" placeholder="Quiz Title" required />
+      <input
+        type="text"
+        [(ngModel)]="quiz.title"
+        name="title"
+        placeholder="📘 Quiz Title"
+        required
+      />
     </div>
 
     <div class="form-group">
-      <textarea [(ngModel)]="quiz.description" name="description" placeholder="Quiz Description" required></textarea>
+      <textarea
+        [(ngModel)]="quiz.description"
+        name="description"
+        placeholder="🖋️ Quiz Description"
+        required
+      ></textarea>
+    </div>
+
+    <!-- ✅ Category -->
+    <div class="form-group">
+      <label for="category">📂 Category:</label>
+      <select
+        id="category"
+        name="category"
+        [(ngModel)]="quiz.category"
+        required
+      >
+        <option value="" disabled selected>Select category</option>
+        <option>General Knowledge</option>
+        <option>Science</option>
+        <option>Mathematics</option>
+        <option>Computer Science</option>
+        <option>History</option>
+        <option>Sports</option>
+        <option>Other</option>
+      </select>
     </div>
 
     <hr />
@@ -17,23 +48,61 @@
     <h3>➕ Add Question</h3>
 
     <div class="form-group">
-      <input type="text" [(ngModel)]="question.text" name="questionText" placeholder="Enter question" required />
+      <input
+        type="text"
+        [(ngModel)]="question.text"
+        name="questionText"
+        placeholder="Enter question"
+        required
+      />
     </div>
 
+    <!-- Options -->
     <div class="form-group">
-      <input type="text" [(ngModel)]="question.option1" name="option1" placeholder="Option 1" required />
-      <input type="text" [(ngModel)]="question.option2" name="option2" placeholder="Option 2" required />
-      <input type="text" [(ngModel)]="question.option3" name="option3" placeholder="Option 3" required />
-      <input type="text" [(ngModel)]="question.option4" name="option4" placeholder="Option 4" required />
+      <input
+        type="text"
+        [(ngModel)]="question.option1"
+        name="option1"
+        placeholder="Option 1"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="question.option2"
+        name="option2"
+        placeholder="Option 2"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="question.option3"
+        name="option3"
+        placeholder="Option 3"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="question.option4"
+        name="option4"
+        placeholder="Option 4"
+        required
+      />
     </div>
 
+    <!-- Correct Answer -->
     <div class="form-group">
-      <label>✅ Correct Answer:</label>
-      <select [(ngModel)]="question.correctAnswer" name="correctAnswer" required>
+      <label for="correctAnswer">✅ Correct Answer:</label>
+      <select
+        id="correctAnswer"
+        [(ngModel)]="question.correctAnswer"
+        name="correctAnswer"
+        required
+      >
         <option value="" disabled>Select correct answer</option>
-        <option *ngFor="let opt of [question.option1, question.option2, question.option3, question.option4]" [value]="opt">
-          {{ opt }}
-        </option>
+        <option [value]="question.option1">{{ question.option1 }}</option>
+        <option [value]="question.option2">{{ question.option2 }}</option>
+        <option [value]="question.option3">{{ question.option3 }}</option>
+        <option [value]="question.option4">{{ question.option4 }}</option>
       </select>
     </div>
 

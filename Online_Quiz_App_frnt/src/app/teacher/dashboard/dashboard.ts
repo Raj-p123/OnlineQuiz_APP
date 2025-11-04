@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-// Import standalone components (optional)
-import { ManageQuizComponent } from '../manage-quiz/manage-quiz';
-import { AddQuizComponent } from '../add-quiz/add-quiz';
-
 @Component({
   selector: 'app-teacher-dashboard',
   standalone: true, // ✅ Important for Angular standalone component
-  imports: [ManageQuizComponent, AddQuizComponent], // ✅ Only if you actually use them in template
+  imports: [], // No components used in template
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'] // ✅ should be styleUrls, not styleUrl
 })

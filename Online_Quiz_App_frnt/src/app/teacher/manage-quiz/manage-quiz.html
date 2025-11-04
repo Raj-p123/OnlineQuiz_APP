@@ -1,20 +1,47 @@
-<div class="manage-quiz-container">
-  <h2>📚 Manage Quizzes</h2>
+<div class="container mt-4">
+  <h2 class="text-center text-primary mb-3">📋 Manage Quizzes</h2>
 
-  <div *ngIf="quizzes.length > 0; else noQuiz">
-    <div *ngFor="let quiz of quizzes" class="quiz-card">
-      <h3>{{ quiz.title }}</h3>
-      <p>{{ quiz.description }}</p>
-      <h4>Questions:</h4>
-      <ul>
-        <li *ngFor="let q of quiz.questions">
-          <strong>{{ q.text }}</strong> — ✅ {{ q.correctAnswer }}
-        </li>
-      </ul>
-    </div>
-  </div>
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Quiz Title</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-  <ng-template #noQuiz>
-    <p>No quizzes available yet.</p>
-  </ng-template>
+    <tbody>
+      <tr *ngFor="let quiz of quizzes; let i = index">
+        <td>{{ i + 1 }}</td>
+
+        <!-- Editing Mode -->
+        <ng-container *ngIf="editingQuiz?.id === quiz.id; else viewMode">
+          <td><input [(ngModel)]="editingQuiz.title" class="form-control" /></td>
+          <td><input [(ngModel)]="editingQuiz.category" class="form-control" /></td>
+          <td><input [(ngModel)]="editingQuiz.description" class="form-control" /></td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="updateQuiz()">💾 Save</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">❌ Cancel</button>
+          </td>
+        </ng-container>
+
+        <!-- View Mode -->
+        <ng-template #viewMode>
+          <td>{{ quiz.title }}</td>
+          <td>{{ quiz.category }}</td>
+          <td>{{ quiz.description }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editQuiz(quiz)">✏️ Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteQuiz(quiz.id)">🗑️ Delete</button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="quizzes.length === 0" class="text-warning text-center mt-3">
+    ⚠️ No quizzes found. Add one to see it here!
+  </p>
 </div>
