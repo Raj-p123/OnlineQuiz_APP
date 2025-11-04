@@ -4,6 +4,8 @@ package com.onlineQuiz.online_Quiz_App.auth.model;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Quiz {
 
@@ -16,7 +18,10 @@ public class Quiz {
     private String category;   // ✅ Add this line
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Question> questions;
+
+
 
 
     // ✅ Getters and Setters

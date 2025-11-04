@@ -1,7 +1,7 @@
-<div class="container mt-4">
-  <h2 class="text-center text-primary mb-3">📋 Manage Quizzes</h2>
+<div class="manage-quiz-container">
+  <h2>📋 Manage Quizzes</h2>
 
-  <table class="table table-striped table-dark">
+  <table class="quiz-table">
     <thead>
       <tr>
         <th>#</th>
@@ -13,35 +13,56 @@
     </thead>
 
     <tbody>
+      <!-- ✅ Show quizzes dynamically -->
       <tr *ngFor="let quiz of quizzes; let i = index">
         <td>{{ i + 1 }}</td>
+        <td>{{ quiz.title }}</td>
+        <td>{{ quiz.category }}</td>
+        <td>{{ quiz.description }}</td>
+        <td>
+          <button class="edit-btn" (click)="editQuiz(quiz)">✏️ Edit</button>
+          <button class="delete-btn" (click)="deleteQuiz(quiz.id)">🗑️ Delete</button>
+        </td>
+      </tr>
 
-        <!-- Editing Mode -->
-        <ng-container *ngIf="editingQuiz?.id === quiz.id; else viewMode">
-          <td><input [(ngModel)]="editingQuiz.title" class="form-control" /></td>
-          <td><input [(ngModel)]="editingQuiz.category" class="form-control" /></td>
-          <td><input [(ngModel)]="editingQuiz.description" class="form-control" /></td>
-          <td>
-            <button class="btn btn-success btn-sm" (click)="updateQuiz()">💾 Save</button>
-            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">❌ Cancel</button>
-          </td>
-        </ng-container>
-
-        <!-- View Mode -->
-        <ng-template #viewMode>
-          <td>{{ quiz.title }}</td>
-          <td>{{ quiz.category }}</td>
-          <td>{{ quiz.description }}</td>
-          <td>
-            <button class="btn btn-primary btn-sm" (click)="editQuiz(quiz)">✏️ Edit</button>
-            <button class="btn btn-danger btn-sm" (click)="deleteQuiz(quiz.id)">🗑️ Delete</button>
-          </td>
-        </ng-template>
+      <!-- ✅ Show message when no quizzes exist -->
+      <tr *ngIf="quizzes.length === 0">
+        <td colspan="5" class="no-data">
+          ⚠️ No quizzes found. Add one to see it here!
+        </td>
       </tr>
     </tbody>
   </table>
 
-  <p *ngIf="quizzes.length === 0" class="text-warning text-center mt-3">
-    ⚠️ No quizzes found. Add one to see it here!
-  </p>
+  <!-- ✅ Edit Form -->
+  <div *ngIf="editingQuiz" class="edit-container">
+    <h3>✏️ Edit Quiz</h3>
+    <form (ngSubmit)="updateQuiz()">
+      <input
+        type="text"
+        [(ngModel)]="editingQuiz.title"
+        name="title"
+        placeholder="Title"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="editingQuiz.category"
+        name="category"
+        placeholder="Category"
+        required
+      />
+      <textarea
+        [(ngModel)]="editingQuiz.description"
+        name="description"
+        placeholder="Description"
+        required
+      ></textarea>
+
+      <div class="buttons">
+        <button type="submit" class="save-btn">💾 Save</button>
+        <button type="button" class="cancel-btn" (click)="cancelEdit()">❌ Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>
