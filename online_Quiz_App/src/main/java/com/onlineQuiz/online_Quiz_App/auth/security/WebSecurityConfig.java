@@ -22,6 +22,7 @@ public class WebSecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+            		.requestMatchers("/api/student/**").permitAll()
                 .requestMatchers("/api/**").permitAll()  // Allow all APIs for now
                 .anyRequest().authenticated()
             )

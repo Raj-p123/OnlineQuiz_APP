@@ -13,4 +13,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     @Query("SELECT q FROM Question q WHERE q.quiz.category = :category")
     List<Question> findByQuizCategory(String category);
+    
 }

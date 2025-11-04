@@ -1,11 +1,13 @@
 package com.onlineQuiz.online_Quiz_App.auth.controller;
 
 import org.springframework.web.bind.annotation.*;
+
+import com.onlineQuiz.online_Quiz_App.DTO.GradingResult;
 import com.onlineQuiz.online_Quiz_App.DTO.QuestionDto;
 import com.onlineQuiz.online_Quiz_App.auth.model.Quiz;
 import com.onlineQuiz.online_Quiz_App.auth.service.StudentService;
 import com.onlineQuiz.online_Quiz_App.auth.service.StudentService.AnswerPayload;
-import com.onlineQuiz.online_Quiz_App.auth.service.StudentService.GradingResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import org.springframework.http.ResponseEntity;

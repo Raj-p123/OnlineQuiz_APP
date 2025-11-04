@@ -14,6 +14,35 @@ export interface QuizRequest {
   questions: QuestionRequest[];
 }
 
+export interface AnswerPayload {
+  questionId: number;
+  selected: string;
+}
+
+export interface SubmissionPayload {
+  studentEmail?: string;
+  answers: AnswerPayload[];
+}
+
+export interface GradingResult {
+  correct: number;
+  total: number;
+  percentage: number;
+}
+
+export interface QuizResult {
+  id: number;
+  studentEmail: string;
+  quizId: number;
+  quizTitle: string;
+  correct: number;
+  total: number;
+  percentage: number;
+  submittedAt: string;
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,4 +60,26 @@ export class QuizService {
   getAllQuizzes() {
     return this.http.get<any[]>(`${this.baseUrl}/all`);
   }
+
+
+  getResultsForStudent(email: string) {
+  return this.http.get<any[]>(
+    `http://localhost:8080/online_quiz_db/api/student/results/student/${email}`
+  );
+}
+
+
+
+submitQuiz(quizId: number, payload: SubmissionPayload): Observable<GradingResult> {
+    return this.http.post<GradingResult>(`${this.baseUrl}/student/quiz/${quizId}/submit`, payload);
+  }
+
+  getAllResults(): Observable<QuizResult[]> {
+    return this.http.get<QuizResult[]>(`${this.baseUrl}/student/results`);
+  }
+
+  getResultsForQuiz(quizId: number) {
+    return this.http.get<QuizResult[]>(`${this.baseUrl}/student/results/quiz/${quizId}`);
+  }
+
 }

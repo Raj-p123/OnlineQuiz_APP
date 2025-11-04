@@ -33,6 +33,10 @@ export class TeacherDashboardComponent implements OnInit {
     this.router.navigate(['/manage-quiz']);
   }
 
+  goToViewResult(): void {
+    this.router.navigate(['/view-result']);
+  }
+
   // ✅ Logout
   logout(): void {
     localStorage.removeItem('currentUser');
