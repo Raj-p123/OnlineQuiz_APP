@@ -1,0 +1,45 @@
+<section class="contact">
+  <div class="contact-container">
+    <h1>Contact <span>Us</span></h1>
+    <p>We’d love to hear from you! Fill out the form below or reach us through our contact details.</p>
+
+    <!-- ✅ Form connected to Angular using ngModel + ngSubmit -->
+    <form class="contact-form" (ngSubmit)="sendMessage()">
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="name"
+        placeholder="Your Name"
+        required
+      />
+
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="email"
+        placeholder="Your Email"
+        required
+      />
+
+      <textarea
+        name="message"
+        [(ngModel)]="message"
+        rows="5"
+        placeholder="Your Message"
+        required
+      ></textarea>
+
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+
+    <!-- ✅ Feedback messages -->
+    <p class="success-message" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <div class="contact-info">
+      <p><strong>Email:</strong> support@quizapp.com</p>
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+      <p><strong>Address:</strong> Bhubaneswar, Odisha, India</p>
+    </div>
+  </div>
+</section>
