@@ -1,0 +1,2 @@
+- [ ] Rename class in src/app/faq.component/faq.component.ts from FaqComponentHtml to FaqComponent
+- [ ] Update src/app/faq.component/faq.component.html.spec.ts to use FaqComponent instead of FaqComponentHtml
