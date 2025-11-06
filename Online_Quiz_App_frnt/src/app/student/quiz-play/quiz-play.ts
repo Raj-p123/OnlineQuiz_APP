@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question, StudentService } from '../student.service';
 import { interval, Subscription } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-quiz-play',
@@ -25,7 +26,8 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private studentService: StudentService,
-    private router: Router
+    private router: Router,
+    private cdRef: ChangeDetectorRef  // <--- Added for forced update
   ) {}
 
   ngOnInit(): void {
@@ -41,11 +43,14 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
 
     this.studentService.getQuestionsByCategory(this.category).subscribe({
       next: (qs: Question[]) => {
+        console.log('API response:', qs); // Debug
         this.questions = qs;
-        this.currentIndex = 0; // Ensure initialization after loading
+        console.log('questions assigned:', this.questions); // Debug
+        this.currentIndex = 0;
         if (qs.length > 0) {
-          this.startQuestionTimer(); // Only start timer if there are questions
+          this.startQuestionTimer();
         }
+        this.cdRef.detectChanges(); // <--- Manually trigger change detection
       },
       error: err => {
         console.error('Failed to load questions:', err);

@@ -1,15 +1,16 @@
-<pre>{{ questions | json }}</pre> <!-- For debugging purposes (temporary) -->
+<!-- Remove debug output line -->
+<!-- <pre>{{ questions | json }}</pre> -->
 
 <div *ngIf="questions.length === 0">
   <h3>No questions available in this category. Please contact your teacher or try another category.</h3>
 </div>
 
-<div *ngIf="questions.length">
+<div *ngIf="questions.length > 0">
   <h3>Question {{ currentIndex + 1 }} / {{ questions.length }}</h3>
   <p>{{ questions[currentIndex]?.question }}</p>
   <div>
     <label *ngFor="let opt of questions[currentIndex]?.options">
-      <input type="radio" name="opt" (change)="selectOption(opt)" [checked]="selectedAnswer===opt" /> {{ opt }}
+      <input type="radio" name="opt" (change)="selectOption(opt)" [checked]="selectedAnswer === opt" /> {{ opt }}
     </label>
   </div>
   <p>Time left: {{ remaining }}s</p>
