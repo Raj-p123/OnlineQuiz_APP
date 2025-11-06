@@ -1,0 +1,45 @@
+.about {
+  padding: 80px 10%;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.about-container h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.about-container h1 span {
+  color: #3498db;
+}
+
+.about-container p {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+.about-features {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.feature {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 25px;
+  width: 250px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+  border-color: #3498db;
+}
