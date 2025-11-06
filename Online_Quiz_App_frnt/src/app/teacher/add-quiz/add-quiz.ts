@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
+import { QUIZ_CATEGORIES } from '../../shared/quiz-categories';
 
 @Component({
   selector: 'app-add-quiz',
@@ -12,8 +13,9 @@ import { PLATFORM_ID } from '@angular/core';
   templateUrl: './add-quiz.html',
   styleUrls: ['./add-quiz.css']
 })
-
 export class AddQuizComponent {
+  categories = QUIZ_CATEGORIES;
+
   quiz = {
     title: '',
     description: '',

@@ -22,6 +22,12 @@ export class QuizCategoryComponent {
   constructor(private router: Router) {}
 
   startQuiz(category: string) {
-    this.router.navigate(['/student/play-quiz', category]);
+    const safeCategory = category?.trim();
+    if (!safeCategory) {
+      console.error('Invalid category selected');
+      return;
+    }
+
+    this.router.navigate(['/student/play-quiz', safeCategory]);
   }
 }

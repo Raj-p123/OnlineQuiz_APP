@@ -22,7 +22,7 @@
       ></textarea>
     </div>
 
-    <!-- ✅ Category -->
+    <!-- ✅ Shared Category Dropdown -->
     <div class="form-group">
       <label for="category">📂 Category:</label>
       <select
@@ -32,13 +32,9 @@
         required
       >
         <option value="" disabled selected>Select category</option>
-        <option>General Knowledge</option>
-        <option>Science</option>
-        <option>Mathematics</option>
-        <option>Computer Science</option>
-        <option>History</option>
-        <option>Sports</option>
-        <option>Other</option>
+        <option *ngFor="let cat of categories" [value]="cat.value">
+          {{ cat.label }}
+        </option>
       </select>
     </div>
 

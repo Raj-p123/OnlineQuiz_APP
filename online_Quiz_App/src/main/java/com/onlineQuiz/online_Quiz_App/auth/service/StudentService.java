@@ -46,7 +46,12 @@ public class StudentService {
 
     // ✅ 4. Get questions by category
     public List<QuestionDto> getQuestionsForCategory(String category) {
-        List<Question> questions = questionRepo.findByQuizCategory(category);
+        String normalized = category.trim().toLowerCase();
+        System.out.println("🔍 Fetching questions for category: " + normalized);
+
+        List<Question> questions = questionRepo.findByQuizCategory(normalized);
+        System.out.println("✅ Questions found: " + questions.size());
+
         return questions.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
@@ -148,7 +153,10 @@ public class StudentService {
 
     // ✅ 10. Grade quiz by category (no save)
     public GradingResult gradeQuizByCategory(String category, List<AnswerPayload> answers) {
-        List<Question> questions = questionRepo.findByQuizCategory(category);
+        String normalized = category.trim().toLowerCase();
+        System.out.println("🧪 Grading submission for category: " + normalized);
+
+        List<Question> questions = questionRepo.findByQuizCategory(normalized);
 
         Map<Long, String> correctMap = questions.stream()
                 .collect(Collectors.toMap(Question::getId, Question::getCorrectAnswer));
@@ -170,7 +178,7 @@ public class StudentService {
         return result;
     }
 
-     // ✅ Inner helper class (for category grading)
+    // ✅ Inner helper class (for category grading)
     public static class AnswerPayload {
         private Long questionId;
         private String selected;
