@@ -1,18 +1,21 @@
-<!-- Remove debug output line -->
-<!-- <pre>{{ questions | json }}</pre> -->
-
-<div *ngIf="questions.length === 0">
-  <h3>No questions available in this category. Please contact your teacher or try another category.</h3>
-</div>
-
-<div *ngIf="questions.length > 0">
-  <h3>Question {{ currentIndex + 1 }} / {{ questions.length }}</h3>
-  <p>{{ questions[currentIndex]?.question }}</p>
-  <div>
-    <label *ngFor="let opt of questions[currentIndex]?.options">
-      <input type="radio" name="opt" (change)="selectOption(opt)" [checked]="selectedAnswer === opt" /> {{ opt }}
-    </label>
+<div class="play-quiz">
+  <div *ngIf="questions.length === 0" class="empty-message">
+    <h3>No questions available in this category. Please contact your teacher or try another category.</h3>
   </div>
-  <p>Time left: {{ remaining }}s</p>
-  <button (click)="next()">Next</button>
+
+  <div *ngIf="questions.length > 0" class="quiz-card">
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="((currentIndex+1)/questions.length)*100"></div>
+    </div>
+    <h3>Question {{ currentIndex + 1 }} / {{ questions.length }}</h3>
+    <div class="question">{{ questions[currentIndex]?.question }}</div>
+    <div class="options">
+      <label class="option-label" *ngFor="let opt of questions[currentIndex]?.options">
+        <input type="radio" name="opt" (change)="selectOption(opt)" [checked]="selectedAnswer === opt" />
+        <span>{{ opt }}</span>
+      </label>
+    </div>
+    <div class="timer">⏰ Time left: {{ remaining }}s</div>
+    <button (click)="next()" class="next-btn">Next</button>
+  </div>
 </div>

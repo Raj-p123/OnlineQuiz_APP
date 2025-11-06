@@ -1,28 +1,97 @@
 .play-quiz {
-  color: white;
-  background: #0a0f1a;
+  color: #21243d;
+  background: #f2f5fa;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 36px 0;
   text-align: center;
 }
 
-.question {
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
+.quiz-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(25,40,94,0.10);
+  padding: 2.2rem 2.6rem 2rem 2.6rem;
+  margin: 40px auto 0 auto;
+  display: inline-block;
+  max-width: 420px;
+  width: 90%;
 }
 
-.options button {
-  display: block;
-  width: 60%;
-  margin: 10px auto;
-  padding: 10px;
-  border: none;
+.progress-bar {
+  height: 6px;
+  margin-bottom: 20px;
+  background: #e0e4ee;
   border-radius: 8px;
-  background: #007bff;
-  color: white;
-  cursor: pointer;
+  overflow: hidden;
+}
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #5ebfff 40%, #1e65b8 100%);
+  transition: width 0.38s cubic-bezier(.4,0,.2,1);
 }
 
-.options button:hover {
-  background: #0062cc;
+.question {
+  font-size: 1.18rem;
+  font-weight: 500;
+  margin: 18px 0 16px 0;
+}
+
+.options {
+  margin: 25px 0 18px 0;
+}
+.option-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #f8fafc;
+  transition: background 0.18s;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.option-label:hover, 
+input[type="radio"]:focus + span {
+  background: #e8f1ff;
+}
+input[type="radio"] {
+  accent-color: #007bff;
+  margin-right: 10px;
+  transform: scale(1.20);
+}
+
+.timer {
+  color: #2260ac;
+  font-weight: 500;
+  margin-bottom: 18px;
+  font-size: 1.07rem;
+}
+
+.next-btn {
+  background: linear-gradient(90deg, #5ebfff 40%, #1e65b8 100%);
+  border: none;
+  color: #fff;
+  padding: 11px 35px;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(30,101,184,0.08);
+  transition: box-shadow 0.15s, background 0.2s;
+}
+.next-btn:hover {
+  box-shadow: 0 5px 13px rgba(30,101,184,0.13);
+  background: linear-gradient(90deg, #1e65b8 60%, #5ebfff 100%);
+}
+
+.empty-message h3 {
+  color: #e74c3c;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  margin-top: 48px;
+  font-size: 1.18rem;
+  box-shadow: 0 2px 10px rgba(200,32,60,0.07);
 }

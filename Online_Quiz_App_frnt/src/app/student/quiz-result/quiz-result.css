@@ -1,18 +1,69 @@
 .result-container {
-  text-align: center;
-  color: #fff;
-  background: #0a0f1a;
-  height: 100vh;
+  min-height: 100vh;
+  background: #f2f5fa;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-button {
-  background: #00aaff;
+.result-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(30,101,184,0.10);
+  padding: 34px 30px 26px 30px;
+  text-align: center;
+}
+
+.result-card h2 {
+  color: #273c61;
+  font-size: 2rem;
+  margin-bottom: 19px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.score {
+  font-size: 1.19rem;
+  margin-bottom: 18px;
+  color: #273c61;
+}
+.score-main {
+  font-size: 1.6rem;
+  color: #28b766;
+  font-weight: 700;
+}
+.score-total {
+  font-size: 1.25rem;
+  color: #2260ac;
+}
+.details-json {
+  background: #f1f8fd;
+  color: #2260ac;
+  padding: 12px;
+  border-radius: 7px;
+  font-size: 0.96rem;
+  word-break: break-word;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.back-btn {
+  background: linear-gradient(90deg, #5ebfff 40%, #1e65b8 100%);
   border: none;
-  padding: 10px 20px;
-  color: white;
+  padding: 11px 33px;
+  color: #fff;
   border-radius: 8px;
-  margin-top: 20px;
+  font-size: 1.07rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  box-shadow: 0 1px 4px rgba(30,101,184,0.08);
+  transition: background 0.2s, box-shadow 0.17s;
+}
+.back-btn:hover {
+  background: linear-gradient(90deg, #1e65b8 65%, #5ebfff 100%);
+  box-shadow: 0 5px 17px rgba(30,101,184,0.15);
 }

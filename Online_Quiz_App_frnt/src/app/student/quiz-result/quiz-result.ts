@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-quiz-result',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './quiz-result.html',
   styleUrl: './quiz-result.css'
 })
