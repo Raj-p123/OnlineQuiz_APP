@@ -29,11 +29,23 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.category = this.route.snapshot.paramMap.get('category') || '';
+    const rawCategory = this.route.snapshot.paramMap.get('category');
+    const safeCategory = rawCategory?.trim();
+
+    if (!safeCategory) {
+      console.error('Category is missing or invalid');
+      return;
+    }
+
+    this.category = safeCategory;
+
     this.studentService.getQuestionsByCategory(this.category).subscribe({
       next: (qs: Question[]) => {
         this.questions = qs;
         this.startQuestionTimer();
+      },
+      error: err => {
+        console.error('Failed to load questions:', err);
       }
     });
   }
@@ -72,7 +84,7 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
         this.router.navigate(['/student/result'], { state: res });
       },
       error: _ => {
-        this.router.navigate(['/student/result'], { state: { score: 0, total: this.questions.length }});
+        this.router.navigate(['/student/result'], { state: { score: 0, total: this.questions.length } });
       }
     });
   }

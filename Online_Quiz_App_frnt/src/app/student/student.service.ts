@@ -22,25 +22,23 @@ export interface Question {
   providedIn: 'root'
 })
 export class StudentService {
-  // Update the base URL to match your backend
-  private baseUrl = 'http://localhost:8080/online_quiz_db/api/quiz';
+  // This URL matches your backend REST path!
+  private baseUrl = 'http://localhost:8080/online_quiz_db/api/student/quiz';
 
   constructor(private http: HttpClient) {}
 
-  // Fetch all quizzes
+  // Fetch all quizzes (fixed endpoint, may need adjustment if backend differs)
   getAllQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(this.baseUrl);
+    return this.http.get<Quiz[]>(`${this.baseUrl}s`);
   }
 
-  // Fetch questions for a specific category (NEW)
+  // Fetch questions for a specific category (FIXED)
   getQuestionsByCategory(category: string): Observable<Question[]> {
     return this.http.get<Question[]>(`${this.baseUrl}/category/${category}/questions`);
-    // Adjust URL as per your backend implementation
   }
 
-  // Submit quiz answers by category (NEW)
+  // Submit quiz answers by category
   submitAnswers(category: string, payload: { answers: { questionId: number; selected: string }[] }) {
     return this.http.post(`${this.baseUrl}/category/${category}/submit`, payload);
-    // Adjust URL to match your backend endpoint
   }
 }

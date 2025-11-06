@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/student")
-@CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
 
     @Autowired

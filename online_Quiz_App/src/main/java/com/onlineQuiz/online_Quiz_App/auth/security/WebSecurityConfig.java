@@ -10,19 +10,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class WebSecurityConfig {
 
-    // ✅ Create PasswordEncoder Bean (Fixes your current error)
+    // ✅ Create PasswordEncoder Bean
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ Basic security setup (disable CSRF, allow all endpoints for now)
+    // ✅ Security Filter Chain with CORS enabled
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors() // <-- This line enables CORS using your CorsConfig bean!
+            .and()
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-            		.requestMatchers("/api/student/**").permitAll()
+                .requestMatchers("/api/student/**").permitAll()
                 .requestMatchers("/api/**").permitAll()  // Allow all APIs for now
                 .anyRequest().authenticated()
             )

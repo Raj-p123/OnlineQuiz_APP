@@ -19,7 +19,7 @@ const routes: Routes = [
     canActivate: [AuthGuard] 
   },
   { 
-    path: 'play-quiz/:id', 
+    path: 'play-quiz/:category',  // ✅ FIXED: changed from ':id' to ':category'
     loadComponent: () => import('./quiz-play/quiz-play').then(m => m.PlayQuizComponent), 
     canActivate: [AuthGuard] 
   },
