@@ -27,18 +27,19 @@ export class StudentService {
 
   constructor(private http: HttpClient) {}
 
-  // Fetch all quizzes (fixed endpoint, may need adjustment if backend differs)
+  // Fetch all quizzes (may need adjustment if backend differs)
   getAllQuizzes(): Observable<Quiz[]> {
     return this.http.get<Quiz[]>(`${this.baseUrl}s`);
   }
 
-  // Fetch questions for a specific category (FIXED)
+  // Fetch questions for a specific category
   getQuestionsByCategory(category: string): Observable<Question[]> {
     return this.http.get<Question[]>(`${this.baseUrl}/category/${category}/questions`);
   }
 
   // Submit quiz answers by category
-  submitAnswers(category: string, payload: { answers: { questionId: number; selected: string }[] }) {
-    return this.http.post(`${this.baseUrl}/category/${category}/submit`, payload);
+  // Send a raw array of answers, not wrapped inside an object
+  submitAnswers(category: string, answers: { questionId: number; selected: string }[]) {
+    return this.http.post(`${this.baseUrl}/category/${category}/submit`, answers);
   }
 }

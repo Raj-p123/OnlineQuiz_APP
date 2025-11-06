@@ -42,7 +42,10 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
     this.studentService.getQuestionsByCategory(this.category).subscribe({
       next: (qs: Question[]) => {
         this.questions = qs;
-        this.startQuestionTimer();
+        this.currentIndex = 0; // Ensure initialization after loading
+        if (qs.length > 0) {
+          this.startQuestionTimer(); // Only start timer if there are questions
+        }
       },
       error: err => {
         console.error('Failed to load questions:', err);
@@ -79,7 +82,7 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
 
   finish() {
     this.timerSub?.unsubscribe();
-    this.studentService.submitAnswers(this.category, { answers: this.answers }).subscribe({
+    this.studentService.submitAnswers(this.category, this.answers).subscribe({
       next: (res: any) => {
         this.router.navigate(['/student/result'], { state: res });
       },
