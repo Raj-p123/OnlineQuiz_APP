@@ -1,0 +1,30 @@
+<div class="history-container">
+  <h2>Your Quiz History</h2>
+  
+  <!-- Debug info (remove later) -->
+  <div>Debug: history length = {{ history.length }}</div>
+  <pre>{{ history | json }}</pre>
+  
+  <table *ngIf="history.length > 0" class="history-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of history">
+        <td>{{ h.category }}</td>
+        <td>{{ h.attemptedAt | date:'short' }}</td>
+        <td>{{ h.score }} / {{ h.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div *ngIf="history.length === 0" class="empty-message">
+    No quiz attempts found.
+  </div>
+  
+  <button routerLink="/student/dashboard" class="back-btn">Back</button>
+</div>

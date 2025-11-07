@@ -28,6 +28,13 @@ const routes: Routes = [
     loadComponent: () => import('./quiz-result/quiz-result').then(m => m.ResultComponent), 
     canActivate: [AuthGuard] 
   },
+  {
+  path: 'quiz-history',
+  loadComponent: () => import('./quiz-history/quiz-history')
+    .then(m => m.QuizHistoryComponent),
+  canActivate: [AuthGuard]
+}
+
 ];
 
 @NgModule({

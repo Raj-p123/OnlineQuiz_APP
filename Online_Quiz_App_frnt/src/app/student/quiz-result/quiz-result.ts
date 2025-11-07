@@ -1,17 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
-
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-result',
-  imports: [CommonModule,RouterModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './quiz-result.html',
-  styleUrl: './quiz-result.css'
+  styleUrls: ['./quiz-result.css']
 })
-
-
 export class ResultComponent {
   score = 0;
   total = 0;
@@ -27,4 +24,3 @@ export class ResultComponent {
     }
   }
 }
-

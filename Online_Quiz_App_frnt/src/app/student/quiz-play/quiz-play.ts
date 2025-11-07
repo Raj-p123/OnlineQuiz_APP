@@ -27,7 +27,7 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private studentService: StudentService,
     private router: Router,
-    private cdRef: ChangeDetectorRef  // <--- Added for forced update
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -43,14 +43,12 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
 
     this.studentService.getQuestionsByCategory(this.category).subscribe({
       next: (qs: Question[]) => {
-        console.log('API response:', qs); // Debug
         this.questions = qs;
-        console.log('questions assigned:', this.questions); // Debug
         this.currentIndex = 0;
         if (qs.length > 0) {
           this.startQuestionTimer();
         }
-        this.cdRef.detectChanges(); // <--- Manually trigger change detection
+        this.cdRef.detectChanges();
       },
       error: err => {
         console.error('Failed to load questions:', err);
@@ -85,10 +83,12 @@ export class PlayQuizComponent implements OnInit, OnDestroy {
     }
   }
 
+  // ---- UPDATED finish() method, duplicate save removed ----
   finish() {
     this.timerSub?.unsubscribe();
     this.studentService.submitAnswers(this.category, this.answers).subscribe({
       next: (res: any) => {
+        // Save is handled by the backend, only navigate!
         this.router.navigate(['/student/result'], { state: res });
       },
       error: _ => {

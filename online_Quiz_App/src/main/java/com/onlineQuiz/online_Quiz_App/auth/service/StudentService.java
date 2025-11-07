@@ -6,13 +6,16 @@ import com.onlineQuiz.online_Quiz_App.DTO.SubmissionPayload;
 import com.onlineQuiz.online_Quiz_App.auth.model.Question;
 import com.onlineQuiz.online_Quiz_App.auth.model.Quiz;
 import com.onlineQuiz.online_Quiz_App.auth.model.QuizResult;
+import com.onlineQuiz.online_Quiz_App.auth.model.QuizAttempt;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuestionRepository;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuizRepository;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuizResultRepository;
+import com.onlineQuiz.online_Quiz_App.auth.repository.QuizAttemptRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,6 +30,9 @@ public class StudentService {
 
     @Autowired
     private QuizResultRepository quizResultRepo;
+
+    @Autowired
+    private QuizAttemptRepository quizAttemptRepo; // <--- Your QuizAttempt repo
 
     // ✅ 1. Get all quizzes
     public List<Quiz> getAllQuizzes() {
@@ -170,6 +176,15 @@ public class StudentService {
                 score++;
             }
         }
+
+        // ---- SAVE QUIZ ATTEMPT for HISTORY ---
+        QuizAttempt attempt = new QuizAttempt();
+        attempt.setUserId(1L); // TODO: Replace with actual user ID logic
+        attempt.setCategory(normalized);
+        attempt.setScore(score);
+        attempt.setTotal(total);
+        attempt.setAttemptedAt(LocalDateTime.now());
+        quizAttemptRepo.save(attempt); // Save to DB
 
         GradingResult result = new GradingResult();
         result.setScore(score);
