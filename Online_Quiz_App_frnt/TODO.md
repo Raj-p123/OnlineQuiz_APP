@@ -1,2 +1,3 @@
-- [ ] Rename class in src/app/faq.component/faq.component.ts from FaqComponentHtml to FaqComponent
-- [ ] Update src/app/faq.component/faq.component.html.spec.ts to use FaqComponent instead of FaqComponentHtml
+- [x] Import RouterModule in quiz-history.ts to enable routerLink in HTML
+- [x] Modify ngOnInit in quiz-history.ts to handle backend response as object or array
+- [ ] Test the quiz history display after changes
