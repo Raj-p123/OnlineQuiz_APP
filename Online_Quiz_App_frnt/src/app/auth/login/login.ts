@@ -28,6 +28,13 @@ export class LoginComponent {
         if(res.name) {
           localStorage.setItem('studentName', res.name);
         }
+        if(res.id) {
+          if (res.role?.toLowerCase() === 'student') {
+            localStorage.setItem('studentId', res.id);
+          } else if (res.role?.toLowerCase() === 'teacher') {
+            localStorage.setItem('teacherId', res.id);
+          }
+        }
 
         const role = res.role?.toLowerCase();
 
