@@ -10,17 +10,15 @@ import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
-  declarations: [
+  imports: [
+    CommonModule,
+    FormsModule,
+    StudentRoutingModule,
     StudentDashboardComponent,
     QuizListComponent,
     PlayQuizComponent,
     ResultComponent,
     ProfileComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    StudentRoutingModule
   ]
 })
 export class StudentModule { }

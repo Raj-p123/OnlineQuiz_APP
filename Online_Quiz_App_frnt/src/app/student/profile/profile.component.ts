@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { StudentService } from '../student.service';
 import { UserProfile } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-profile',
+  standalone: true,
+  imports: [CommonModule, FormsModule, NgIf],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })

@@ -5,24 +5,22 @@ import { FormsModule } from '@angular/forms';
 
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherDashboardComponent } from './dashboard/dashboard';
-import { AddQuizComponent } from './add-quiz/add-quiz.component';
-import { ManageQuizComponent } from './manage-quiz/manage-quiz.component';
-import { ViewResultComponent } from './view-result/view-result.component';
+import { AddQuizComponent } from './add-quiz/add-quiz';
+import { ManageQuizComponent } from './manage-quiz/manage-quiz';
+import { ViewResultComponent } from './view-result/view-result';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
-  declarations: [
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    TeacherRoutingModule,
     TeacherDashboardComponent,
     AddQuizComponent,
     ManageQuizComponent,
     ViewResultComponent,
     ProfileComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    TeacherRoutingModule
   ]
 })
 export class TeacherModule { }
