@@ -37,6 +37,10 @@ export class TeacherDashboardComponent implements OnInit {
     this.router.navigate(['/view-result']);
   }
 
+  goToProfile(): void {
+    this.router.navigate(['/teacher/profile']);
+  }
+
   // ✅ Logout
   logout(): void {
     localStorage.removeItem('currentUser');

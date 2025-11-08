@@ -1,19 +1,98 @@
-<div class="dashboard-header">
-</div>
+<div class="dashboard-wrapper">
 
-<!-- Personalized welcome message -->
-<div class="welcome-section" *ngIf="studentName">
-  <h3>Welcome, {{ studentName }}!</h3>
-</div>
+  <!-- ======= Header Section ======= -->
+  <header class="dashboard-header">
+    <h1 class="title">🧠 Online Quiz Portal</h1>
+    <p class="subtitle">Empowering your knowledge every day!</p>
+  </header>
 
-<div class="dashboard-main-cards">
-  <div class="nav-card" (click)="goToTakeQuiz()">
-    <h3>Take Quiz</h3>
-    <p>Attempt new quizzes available for you.</p>
-  </div>
-  <!-- Leaderboard card removed -->
-  <div class="nav-card" (click)="goToQuizHistory()">
-    <h3>Quiz History</h3>
-    <p>Review your previous quiz attempts.</p>
-  </div>
+  <!-- ======= Welcome Section ======= -->
+  <section class="welcome-section" *ngIf="studentName">
+    <h2>👋 Welcome back, <span>{{ studentName }}</span>!</h2>
+    <p class="quote">{{ motivationalQuote }}</p>
+  </section>
+
+  <!-- ======= Stats Overview ======= -->
+  <section class="stats-grid">
+    <div class="stat-card glow1">
+      <h3>{{ totalQuizzes }}</h3>
+      <p>Total Quizzes</p>
+    </div>
+    <div class="stat-card glow2">
+      <h3>{{ quizzesTaken }}</h3>
+      <p>Quizzes Taken</p>
+    </div>
+    <div class="stat-card glow3">
+      <h3>{{ averageScore }}%</h3>
+      <p>Average Score</p>
+    </div>
+  </section>
+
+  <!-- ======= Navigation Cards ======= -->
+  <section class="dashboard-main-cards">
+    <div class="nav-card take-quiz" (click)="goToTakeQuiz()">
+      <div class="icon">🎯</div>
+      <h3>Take Quiz</h3>
+      <p>Explore new quizzes in various categories.</p>
+      <button class="btn-primary">Start Now</button>
+    </div>
+
+    <div class="nav-card history" (click)="goToQuizHistory()">
+      <div class="icon">📜</div>
+      <h3>Quiz History</h3>
+      <p>View your previous quiz performances.</p>
+      <button class="btn-secondary">View History</button>
+    </div>
+
+    <div class="nav-card profile" (click)="goToProfile()">
+      <div class="icon">👤</div>
+      <h3>My Profile</h3>
+      <p>View and edit your profile details.</p>
+      <button class="btn-secondary">View Profile</button>
+    </div>
+
+    <div class="nav-card leaderboard" (click)="goToLeaderboard()">
+      <div class="icon">🏆</div>
+      <h3>Leaderboard</h3>
+      <p>Compete with others and climb the ranks!</p>
+      <button class="btn-gold">Check Rank</button>
+    </div>
+  </section>
+
+  <!-- ======= Achievements Section ======= -->
+  <section class="achievement-section">
+    <h3>🏅 Your Achievements</h3>
+    <div class="badges">
+      <div class="badge-card">
+        <img src="assets/badge-gold.png" alt="Gold Badge">
+        <p>Gold Performer</p>
+      </div>
+      <div class="badge-card">
+        <img src="assets/badge-speed.png" alt="Speed Learner">
+        <p>Fast Learner</p>
+      </div>
+      <div class="badge-card">
+        <img src="assets/badge-accuracy.png" alt="Accurate">
+        <p>Accuracy Master</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Leaderboard Preview ======= -->
+  <section class="leaderboard-preview">
+    <h3>🔥 Top 3 This Week</h3>
+    <div class="leaderboard-mini">
+      <div class="leader" *ngFor="let player of topPlayers; let i = index">
+        <span class="rank">{{ i + 1 }}</span>
+        <span class="name">{{ player.name }}</span>
+        <span class="score">{{ player.score }} pts</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Footer ======= -->
+  <footer class="footer">
+    <p>© {{ currentYear }} Online Quiz App | Built with ❤️ by Rajendra</p>
+  </footer>
+
 </div>

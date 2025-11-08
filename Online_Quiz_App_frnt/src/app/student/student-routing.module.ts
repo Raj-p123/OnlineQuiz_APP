@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { 
     path: 'dashboard', 
     loadComponent: () => import('./dashboard/dashboard').then(m => m.StudentDashboardComponent), 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'profile', 
+    component: ProfileComponent,
     canActivate: [AuthGuard] 
   },
   { 

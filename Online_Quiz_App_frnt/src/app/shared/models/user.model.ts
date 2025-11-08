@@ -1,6 +1,6 @@
-export interface User {
-  id?: number;
-  username: string;
-  email?: string;
-  role?: string;
+export interface UserProfile {
+  id: number;
+  name: string;
+  email: string;
+  role: 'student' | 'teacher';
 }

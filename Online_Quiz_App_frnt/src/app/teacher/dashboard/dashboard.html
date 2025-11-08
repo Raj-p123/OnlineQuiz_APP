@@ -5,9 +5,10 @@
   </header>
 
   <main class="dashboard">
-    <section class="card">
-      <h3>👤 Profile Info</h3>
-      <p><strong>Name:</strong> {{ teacherName }}</p>
+    <section class="card" (click)="goToProfile()">
+      <h3>👤 My Profile</h3>
+      <p>View and edit your profile details.</p>
+      <button class="btn">View Profile</button>
     </section>
 
     <section class="card">

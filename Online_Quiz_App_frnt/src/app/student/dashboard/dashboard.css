@@ -1,33 +1,188 @@
+.dashboard-wrapper {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #667eea, #764ba2);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 60px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* ===== Header ===== */
+.dashboard-header {
+  text-align: center;
+  padding: 40px 10px 20px;
+  backdrop-filter: blur(8px);
+}
+.title {
+  font-size: 2.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.subtitle {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+}
+
+/* ===== Welcome Section ===== */
+.welcome-section {
+  text-align: center;
+  margin: 25px auto;
+}
+.welcome-section h2 span {
+  color: #ffda79;
+}
+.quote {
+  font-style: italic;
+  color: #ddd;
+  margin-top: 5px;
+}
+
+/* ===== Stats Cards ===== */
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 30px 0;
+}
+.stat-card {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 15px;
+  width: 150px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.25);
+}
+.glow1 { box-shadow: 0 0 15px #00c9a7; }
+.glow2 { box-shadow: 0 0 15px #ffb400; }
+.glow3 { box-shadow: 0 0 15px #ff4b5c; }
+.stat-card h3 { font-size: 1.8rem; color: #fff; }
+.stat-card p { font-size: 0.9rem; color: #e0e0e0; }
+
+/* ===== Navigation Cards ===== */
 .dashboard-main-cards {
   display: flex;
   justify-content: center;
-  gap: 2.5rem;
-  padding: 50px 10px 0 10px;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 20px;
 }
-
 .nav-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 18px rgba(44, 62, 80, 0.11);
-  padding: 34px 32px 30px 32px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  width: 280px;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
-  transition: box-shadow 0.2s, transform 0.2s;
-  min-width: 230px;
-  cursor: pointer;
+  transition: transform 0.3s ease;
 }
-
 .nav-card:hover {
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.19);
-  transform: translateY(-8px) scale(1.04);
+  transform: translateY(-10px);
+}
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+.btn-primary, .btn-secondary, .btn-gold {
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-primary {
+  background: #00c9a7;
+  color: white;
+}
+.btn-primary:hover { background: #00a184; }
+.btn-secondary {
+  background: #ffb400;
+  color: white;
+}
+.btn-secondary:hover { background: #e29d00; }
+.btn-gold {
+  background: #ff4b5c;
+  color: white;
+}
+.btn-gold:hover { background: #e33a49; }
+
+/* ===== Achievements ===== */
+.achievement-section {
+  text-align: center;
+  margin-top: 40px;
+}
+.badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 15px;
+}
+.badge-card {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 15px;
+  width: 120px;
+  transition: 0.3s;
+}
+.badge-card:hover {
+  transform: scale(1.1);
+}
+.badge-card img {
+  width: 60px;
+  margin-bottom: 5px;
 }
 
-.nav-card h3 {
-  margin-bottom: 10px;
-  font-size: 1.6rem;
-  color: #2980b9;
+/* ===== Leaderboard Preview ===== */
+.leaderboard-preview {
+  text-align: center;
+  margin-top: 40px;
+}
+.leaderboard-mini {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.leader {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 10px 15px;
+}
+.rank {
+  font-weight: 700;
+  color: #ffda79;
+}
+.name {
+  flex: 1;
+  text-align: left;
+  color: #fff;
+}
+.score {
+  color: #ddd;
 }
 
-.nav-card p {
-  color: #555;
-  font-size: 1.1rem;
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 50px;
+  color: #e0e0e0;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
