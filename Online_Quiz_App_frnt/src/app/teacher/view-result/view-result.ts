@@ -21,12 +21,10 @@ interface QuizResult {
   styleUrl: './view-result.css'
 })
 
-
 export class ViewResultComponent implements OnInit {
- results: QuizResult[] = [];
+  results: QuizResult[] = [];
   loading = false;
   error: string | null = null;
-  studentEmail: string = 'rajendra@example.com'; // replace with actual email (or from login)
 
   constructor(private quizService: QuizService) {}
 
@@ -34,22 +32,32 @@ export class ViewResultComponent implements OnInit {
     this.loadResults();
   }
 
-  loadResults() {
-    this.loading = true;
-    this.error = null;
+  loadResults(): void {
+  this.loading = true;
+  this.error = null;
 
-    // You can use getAllResults() if it's admin view
-    this.quizService.getResultsForStudent(this.studentEmail).subscribe({
-      next: (data) => {
-        console.log('✅ Results loaded:', data);
+  this.quizService.getAllResults().subscribe({
+    next: (data: any) => {
+      console.log('✅ Raw API response:', data);
+
+      // handle both cases
+      if (Array.isArray(data)) {
         this.results = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('❌ Failed to load results', err);
-        this.error = '⚠️ Failed to load results. Please check backend or network.';
-        this.loading = false;
+      } else if (data && Array.isArray(data.results)) {
+        this.results = data.results;
+      } else {
+        this.results = [];
       }
-    });
-  }
+
+      this.loading = false;
+      console.log('✅ Parsed Results:', this.results);
+    },
+    error: (err) => {
+      console.error('❌ Failed to load results', err);
+      this.error = '⚠️ Unable to load quiz results. Please check backend.';
+      this.loading = false;
+    }
+  });
+}
+
 }

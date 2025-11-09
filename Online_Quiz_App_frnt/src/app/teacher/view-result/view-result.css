@@ -1,32 +1,62 @@
 .result-container {
-  background-color: #0b0f19;
-  color: #e0e0e0;
-  padding: 2rem;
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+  background: #0b0f19;
+  color: #e4e4e4;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #0005;
 }
 
 .title {
-  font-size: 1.8rem;
-  color: #00bcd4;
-  margin-bottom: 1rem;
+  color: cyan;
   text-align: center;
-  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.refresh-btn {
+  background: #00bfff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  float: right;
+  cursor: pointer;
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: #111827;
+  color: #fff;
+}
+
+.result-table th, .result-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+.pass {
+  color: #00ff88;
+}
+
+.fail {
+  color: #ff5555;
 }
 
 .loading {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .spinner {
-  border: 4px solid #2b2b2b;
-  border-top: 4px solid #00bcd4;
+  border: 4px solid #222;
+  border-top: 4px solid cyan;
   border-radius: 50%;
   width: 40px;
   height: 40px;
+  margin: 15px auto;
   animation: spin 1s linear infinite;
-  margin: 0 auto 10px;
 }
 
 @keyframes spin {
@@ -35,74 +65,9 @@
   }
 }
 
-.result-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: #141a29;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 12px rgba(0, 188, 212, 0.2);
-}
-
-.result-table th,
-.result-table td {
-  padding: 12px 16px;
-  text-align: center;
-  border-bottom: 1px solid #1f283e;
-}
-
-.result-table th {
-  background-color: #00bcd4;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.5px;
-}
-
-.result-table tr:hover {
-  background-color: #1a2235;
-  transition: 0.3s;
-}
-
-.pass {
-  color: #4caf50;
-  font-weight: 600;
-}
-
-.fail {
-  color: #f44336;
-  font-weight: 600;
-}
-
 .no-results {
   text-align: center;
+  color: #ccc;
   font-size: 1.1rem;
-  margin-top: 40px;
-  color: #aaa;
-}
-
-.error-box {
-  background-color: #f44336;
-  color: white;
-  padding: 12px;
-  border-radius: 6px;
-  text-align: center;
   margin-top: 20px;
-}
-
-.refresh-btn {
-  background-color: #00bcd4;
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-bottom: 12px;
-  display: block;
-  margin-left: auto;
-}
-
-.refresh-btn:hover {
-  background-color: #0199ad;
 }

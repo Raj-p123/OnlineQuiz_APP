@@ -4,48 +4,42 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "quiz_results")
 public class QuizResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String studentName;
     private String studentEmail;
+    private Long quizId;
     private String quizTitle;
-    private int score;
-    private int totalQuestions;
+    private int correct;
+    private int total;
+    private double percentage;
     private LocalDateTime submittedAt;
-
-    public QuizResult() {}
-
-    public QuizResult(String studentName, String studentEmail, String quizTitle, int score, int totalQuestions) {
-        this.studentName = studentName;
-        this.studentEmail = studentEmail;
-        this.quizTitle = quizTitle;
-        this.score = score;
-        this.totalQuestions = totalQuestions;
-        this.submittedAt = LocalDateTime.now();
-    }
 
     // ✅ Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getStudentName() { return studentName; }
-    public void setStudentName(String studentName) { this.studentName = studentName; }
-
     public String getStudentEmail() { return studentEmail; }
     public void setStudentEmail(String studentEmail) { this.studentEmail = studentEmail; }
+
+    public Long getQuizId() { return quizId; }
+    public void setQuizId(Long quizId) { this.quizId = quizId; }
 
     public String getQuizTitle() { return quizTitle; }
     public void setQuizTitle(String quizTitle) { this.quizTitle = quizTitle; }
 
-    public int getScore() { return score; }
-    public void setScore(int score) { this.score = score; }
+    public int getCorrect() { return correct; }
+    public void setCorrect(int correct) { this.correct = correct; }
 
-    public int getTotalQuestions() { return totalQuestions; }
-    public void setTotalQuestions(int totalQuestions) { this.totalQuestions = totalQuestions; }
+    public int getTotal() { return total; }
+    public void setTotal(int total) { this.total = total; }
+
+    public double getPercentage() { return percentage; }
+    public void setPercentage(double percentage) { this.percentage = percentage; }
 
     public LocalDateTime getSubmittedAt() { return submittedAt; }
     public void setSubmittedAt(LocalDateTime submittedAt) { this.submittedAt = submittedAt; }

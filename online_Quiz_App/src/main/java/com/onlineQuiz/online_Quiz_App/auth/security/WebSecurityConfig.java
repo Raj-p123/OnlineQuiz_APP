@@ -25,7 +25,8 @@ public class WebSecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/student/**").permitAll()
-                .requestMatchers("/api/**").permitAll()  // Allow all APIs for now
+                .requestMatchers("/api/**").permitAll()
+                .requestMatchers("/api/teacher/**").permitAll()// Allow all APIs for now
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login.disable())
