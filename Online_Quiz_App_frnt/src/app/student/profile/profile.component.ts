@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StudentService } from '../student.service';
 import { UserProfile } from '../../shared/models/user.model';
@@ -16,14 +16,18 @@ export class ProfileComponent implements OnInit {
   editableStudent: UserProfile = {} as UserProfile;
   isEditing = false;
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit(): void {
-    const studentId = Number(localStorage.getItem('studentId'));
-    this.studentService.getStudentById(studentId).subscribe(student => {
-      this.student = student;
-      this.editableStudent = { ...student };
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      const studentId = Number(localStorage.getItem('studentId'));
+      if (studentId) {
+        this.studentService.getStudentById(studentId).subscribe(student => {
+          this.student = student;
+          this.editableStudent = { ...student };
+        });
+      }
+    }
   }
 
   toggleEdit(): void {

@@ -5,12 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import com.onlineQuiz.online_Quiz_App.DTO.GradingResult;
 import com.onlineQuiz.online_Quiz_App.DTO.QuestionDto;
 import com.onlineQuiz.online_Quiz_App.auth.model.Quiz;
+import com.onlineQuiz.online_Quiz_App.auth.model.User; // Import User
 import com.onlineQuiz.online_Quiz_App.auth.service.StudentService;
 import com.onlineQuiz.online_Quiz_App.auth.service.StudentService.AnswerPayload;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import java.util.Optional; // Import Optional
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus; // Import HttpStatus
+import java.util.Map;
+
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -19,6 +24,18 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @GetMapping("/dashboard/{studentId}")
+    public ResponseEntity<Map<String, Object>> getDashboardData(@PathVariable Long studentId) {
+        Map<String, Object> dashboardData = studentService.getDashboardData(studentId);
+        return ResponseEntity.ok(dashboardData);
+    }
+
+    @GetMapping("/leaderboard")
+    public ResponseEntity<List<Map<String, Object>>> getLeaderboard() {
+        List<Map<String, Object>> leaderboard = studentService.getLeaderboard();
+        return ResponseEntity.ok(leaderboard);
+    }
 
     // Get all quizzes
     @GetMapping("/quizzes")
@@ -58,5 +75,23 @@ public class StudentController {
         @RequestBody List<AnswerPayload> answers) {
         GradingResult result = studentService.gradeQuizByCategory(category, answers);
         return ResponseEntity.ok(result);
+    }
+
+    // NEW: Get student profile by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getStudentProfile(@PathVariable Long id) {
+        Optional<User> student = studentService.getStudentById(id);
+        return student.map(ResponseEntity::ok)
+                      .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // NEW: Update student profile
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateStudentProfile(@PathVariable Long id, @RequestBody User user) {
+        if (!id.equals(user.getId())) {
+            return ResponseEntity.badRequest().build();
+        }
+        User updatedUser = studentService.updateStudent(user);
+        return ResponseEntity.ok(updatedUser);
     }
 }

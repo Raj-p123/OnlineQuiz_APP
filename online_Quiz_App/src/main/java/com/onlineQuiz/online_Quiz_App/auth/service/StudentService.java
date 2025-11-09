@@ -7,17 +7,23 @@ import com.onlineQuiz.online_Quiz_App.auth.model.Question;
 import com.onlineQuiz.online_Quiz_App.auth.model.Quiz;
 import com.onlineQuiz.online_Quiz_App.auth.model.QuizResult;
 import com.onlineQuiz.online_Quiz_App.auth.model.QuizAttempt;
+import com.onlineQuiz.online_Quiz_App.auth.model.User; // Added import for User
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuestionRepository;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuizRepository;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuizResultRepository;
 import com.onlineQuiz.online_Quiz_App.auth.repository.QuizAttemptRepository;
+import com.onlineQuiz.online_Quiz_App.auth.repository.UserRepository; // Added import for UserRepository
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired; // Added import for Autowired
+import org.springframework.stereotype.Service; // Added import for Service
 
-import java.time.LocalDateTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.LocalDateTime; // Added import for LocalDateTime
+import java.util.List; // Added import for List
+import java.util.Map; // Added import for Map
+import java.util.Optional; // Added import for Optional
+import java.util.stream.Collectors; // Added import for Collectors
+
+import org.springframework.transaction.annotation.Transactional; // Added import for Transactional
 
 @Service
 public class StudentService {
@@ -32,7 +38,23 @@ public class StudentService {
     private QuizResultRepository quizResultRepo;
 
     @Autowired
-    private QuizAttemptRepository quizAttemptRepo; // <--- Your QuizAttempt repo
+    private QuizAttemptRepository quizAttemptRepo;
+
+    @Autowired
+    private UserRepository userRepository; // Inject UserRepository
+
+    // ... existing methods ...
+
+    // NEW: Get student by ID
+    public Optional<User> getStudentById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    // NEW: Update student profile
+    @Transactional // Added Transactional annotation
+    public User updateStudent(User user) {
+        return userRepository.save(user);
+    }
 
     // ✅ 1. Get all quizzes
     public List<Quiz> getAllQuizzes() {
@@ -203,5 +225,28 @@ public class StudentService {
 
         public String getSelected() { return selected; }
         public void setSelected(String selected) { this.selected = selected; }
+    }
+
+    public Map<String, Object> getDashboardData(Long studentId) {
+        Map<String, Object> dashboardData = new java.util.HashMap<>();
+        long totalQuizzes = quizRepo.count();
+        long attemptedQuizzes = quizAttemptRepo.countByUserId(studentId);
+        Double averageScore = quizAttemptRepo.findAverageScoreByUserId(studentId);
+
+        dashboardData.put("totalQuizzes", totalQuizzes);
+        dashboardData.put("attempted", attemptedQuizzes);
+        dashboardData.put("averageScore", averageScore != null ? averageScore : 0.0);
+        return dashboardData;
+    }
+
+    public List<Map<String, Object>> getLeaderboard() {
+        List<Object[]> results = quizAttemptRepo.findTopPerformers();
+        return results.stream().map(row -> {
+            Map<String, Object> map = new java.util.HashMap<>();
+            User user = (User) row[0];
+            map.put("studentName", user.getName());
+            map.put("score", row[1]);
+            return map;
+        }).collect(Collectors.toList());
     }
 }
