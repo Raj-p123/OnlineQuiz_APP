@@ -1,27 +1,104 @@
 <div class="teacher-dashboard">
-  <header class="header">
-    <h2>Welcome, {{ teacherName }}</h2>
-    <button class="logout-btn" (click)="logout()">Logout</button>
-  </header>
 
-  <main class="dashboard">
-    <section class="card" (click)="goToProfile()">
-      <h3>👤 My Profile</h3>
-      <p>View and edit your profile details.</p>
-      <button class="btn">View Profile</button>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="sidebar-title">Quiz Master</h2>
+    <nav>
+      <ul>
+        <li (click)="navigate('dashboard')" [class.active]="activeLink === 'dashboard'">
+          <i class="fas fa-home"></i> Dashboard
+        </li>
+        <li (click)="navigate('add-quiz')" [class.active]="activeLink === 'add-quiz'">
+          <i class="fas fa-plus-circle"></i> Create Quiz
+        </li>
+        <li (click)="navigate('manage-quiz')" [class.active]="activeLink === 'manage-quiz'">
+          <i class="fas fa-edit"></i> Manage Quizzes
+        </li>
+        <li (click)="navigate('view-result')" [class.active]="activeLink === 'view-result'">
+          <i class="fas fa-chart-bar"></i> View Results
+        </li>
+        <li (click)="navigate('profile')" [class.active]="activeLink === 'profile'">
+          <i class="fas fa-user"></i> Profile
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <!-- Header -->
+    <header class="dashboard-header">
+      <h1>Welcome, <span class="highlight">{{ teacherName }}</span></h1>
+      <p class="subtitle">Here’s a quick summary of your quiz activities</p>
+    </header>
+
+    <!-- Stats Overview -->
+    <section class="stats-container">
+      <div class="stat-card">
+        <i class="fas fa-book-open"></i>
+        <div>
+          <h2>{{ totalQuizzes }}</h2>
+          <p>Total Quizzes</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <div>
+          <h2>{{ totalStudents }}</h2>
+          <p>Total Students</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-award"></i>
+        <div>
+          <h2>{{ averageScore }}%</h2>
+          <p>Average Score</p>
+        </div>
+      </div>
     </section>
 
-    <section class="card">
-      <h3>📝 Create Quiz</h3>
-      <p>Start creating new quizzes for your students.</p>
-      <button (click)="goToAddQuiz()" class="btn">Create Quiz</button>
+    <!-- Recent Quizzes -->
+    <section class="recent-section">
+      <h3>Recent Quizzes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Quiz Title</th>
+            <th>Category</th>
+            <th>Date Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quiz of recentQuizzes">
+            <td>{{ quiz.title }}</td>
+            <td>{{ quiz.category }}</td>
+            <td>{{ quiz.createdAt | date: 'mediumDate' }}</td>
+            <td><button (click)="editQuiz(quiz.id)" class="edit-btn">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
-    <section class="card">
-      <h3>📚 Manage Quizzes</h3>
-      <p>View and edit your existing quizzes.</p>
-      <button (click)="goToManageQuiz()" class="btn">Manage Quizzes</button>
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <h3>Quick Actions</h3>
+      <div class="action-grid">
+        <div class="action-card create" (click)="navigate('add-quiz')">
+          <i class="fas fa-plus"></i>
+          <p>Create New Quiz</p>
+        </div>
+        <div class="action-card manage" (click)="navigate('manage-quiz')">
+          <i class="fas fa-tasks"></i>
+          <p>Manage Existing Quizzes</p>
+        </div>
+        <div class="action-card results" (click)="navigate('view-result')">
+          <i class="fas fa-chart-line"></i>
+          <p>Analyze Results</p>
+        </div>
+      </div>
     </section>
-    <!-- Removed View Results section -->
+
   </main>
 </div>

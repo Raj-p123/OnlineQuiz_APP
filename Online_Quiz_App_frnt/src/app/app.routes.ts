@@ -12,12 +12,8 @@ export const routes: Routes = [
   { path: 'contact', loadComponent: () => import('./contact.component/contact.component').then(m => m.ContactComponent) },
 
   { path: 'student', loadChildren: () => import('./student/student.module').then(m => m.StudentModule) },
-  { path: 'teacher', loadChildren: () => import('./teacher/teacher.module').then(m => m.TeacherModule) },
+  { path: 'teacher', loadChildren: () => import('./teacher/teacher-routing.module').then(m => m.TEACHER_ROUTES) },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   { path: 'student/dashboard', loadComponent: () => import('./student/dashboard/dashboard').then(m => m.StudentDashboardComponent) },
-  { path: '', redirectTo: '/student/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', loadComponent: () => import('./teacher/dashboard/dashboard').then(m => m.TeacherDashboardComponent) },
-  { path: 'add-quiz', loadComponent: () => import('./teacher/add-quiz/add-quiz').then(m => m.AddQuizComponent) },
-  { path: 'manage-quiz', loadComponent: () => import('./teacher/manage-quiz/manage-quiz').then(m => m.ManageQuizComponent) },
-  { path: 'view-result', loadComponent: () => import('./teacher/view-result/view-result').then(m => m.ViewResultComponent) }
+  { path: '', redirectTo: '/student/dashboard', pathMatch: 'full' }
 ];

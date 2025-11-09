@@ -1,49 +1,50 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-teacher-dashboard',
-  standalone: true, // ✅ Important for Angular standalone component
-  imports: [], // No components used in template
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './dashboard.html',
-  styleUrls: ['./dashboard.css'] // ✅ should be styleUrls, not styleUrl
+  styleUrls: ['./dashboard.css']
 })
+
 export class TeacherDashboardComponent implements OnInit {
-  teacherName: string = '';
+
+  teacherName = '';
+  totalQuizzes = 0;
+  totalStudents = 0;
+  averageScore = 0;
+  activeLink = 'dashboard';
+  recentQuizzes: any[] = [];
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const user = localStorage.getItem('currentUser');
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      this.teacherName = parsedUser.name || 'Teacher';
-    } else {
-      this.teacherName = 'Teacher';
-    }
+    this.teacherName = localStorage.getItem('teacherName') || 'Teacher';
+    this.loadDashboardStats();
   }
 
-  // ✅ Navigate to Add Quiz page
-  goToAddQuiz(): void {
-    this.router.navigate(['/add-quiz']);
+  loadDashboardStats() {
+    // Dummy data – Replace with backend API later
+    this.totalQuizzes = 12;
+    this.totalStudents = 150;
+    this.averageScore = 85;
+    this.recentQuizzes = [
+      { id: 1, title: 'JavaScript Fundamentals', category: 'Programming', createdAt: new Date('2025-10-28') },
+      { id: 2, title: 'History of Ancient Rome', category: 'History', createdAt: new Date('2025-10-25') },
+    ];
   }
 
-  // ✅ Navigate to Manage Quiz page
-  goToManageQuiz(): void {
-    this.router.navigate(['/manage-quiz']);
+  editQuiz(id: number) {
+    alert(`Editing quiz ID: ${id}`);
   }
 
-  goToViewResult(): void {
-    this.router.navigate(['/view-result']);
-  }
-
-  goToProfile(): void {
-    this.router.navigate(['/teacher/profile']);
-  }
-
-  // ✅ Logout
-  logout(): void {
-    localStorage.removeItem('currentUser');
-    this.router.navigate(['/login']);
+  navigate(route: string) {
+    this.activeLink = route;
+    this.router.navigate([`/teacher/${route}`]);
   }
 }

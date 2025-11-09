@@ -19,9 +19,12 @@
         <td>{{ quiz.category }}</td>
         <td>{{ quiz.description }}</td>
         <td>
-          <button class="view-btn" (click)="viewQuiz(quiz)">👁️ View</button>
-          <button class="edit-btn" (click)="editQuiz(quiz)">✏️ Edit</button>
-          <button class="delete-btn" (click)="deleteQuiz(quiz.id)">🗑️ Delete</button>
+          <button class="btn btn-view" (click)="viewQuiz(quiz)">
+            <i class="fas fa-eye"></i> View
+          </button>
+          <button class="btn btn-delete" (click)="deleteQuiz(quiz.id)">
+            <i class="fas fa-trash"></i> Delete
+          </button>
         </td>
       </tr>
 
@@ -31,10 +34,10 @@
     </tbody>
   </table>
 
-  <!-- VIEW QUESTIONS -->
-  <div *ngIf="selectedQuiz" class="questions-container">
+  <!-- ✅ QUESTIONS SECTION -->
+  <div *ngIf="selectedQuiz" class="questions-section">
     <h3>🧾 Questions for: {{ selectedQuiz.title }}</h3>
-    <button class="add-btn" (click)="startAddQuestion()">➕ Add Question</button>
+    <button class="btn btn-add" (click)="toggleAddQuestion()">➕ Add Question</button>
 
     <table class="quiz-table">
       <thead>
@@ -42,7 +45,7 @@
           <th>#</th>
           <th>Question</th>
           <th>Options</th>
-          <th>Correct</th>
+          <th>Correct Answer</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -53,49 +56,34 @@
           <td>{{ q.option1 }}, {{ q.option2 }}, {{ q.option3 }}, {{ q.option4 }}</td>
           <td>{{ q.correctAnswer }}</td>
           <td>
-            <button class="edit-btn" (click)="editQuestion(q)">✏️ Edit</button>
-            <button class="delete-btn" (click)="deleteQuestion(q.id)">🗑️ Delete</button>
+            <button class="btn btn-delete" (click)="deleteQuestion(q.id)">
+              🗑️ Delete
+            </button>
           </td>
         </tr>
 
         <tr *ngIf="questions.length === 0">
-          <td colspan="5" class="no-data">⚠️ No questions found.</td>
+          <td colspan="5" class="no-data">⚠️ No questions found for this quiz.</td>
         </tr>
       </tbody>
     </table>
 
-    <!-- ADD QUESTION FORM -->
-    <div *ngIf="addingQuestion" class="edit-container">
-      <h4>➕ Add Question</h4>
+    <!-- ✅ ADD QUESTION FORM -->
+    <div *ngIf="showAddForm" class="add-form">
+      <h4>➕ Add New Question</h4>
       <form (ngSubmit)="saveNewQuestion()">
-        <input [(ngModel)]="newQuestion.text" name="text" placeholder="Question text" required />
-        <input [(ngModel)]="newQuestion.option1" name="option1" placeholder="Option 1" required />
-        <input [(ngModel)]="newQuestion.option2" name="option2" placeholder="Option 2" required />
-        <input [(ngModel)]="newQuestion.option3" name="option3" placeholder="Option 3" required />
-        <input [(ngModel)]="newQuestion.option4" name="option4" placeholder="Option 4" required />
-        <input [(ngModel)]="newQuestion.correctAnswer" name="correctAnswer" placeholder="Correct Answer" required />
+        <input type="text" [(ngModel)]="newQuestion.text" name="text" placeholder="Enter question" required />
 
-        <div class="buttons">
-          <button type="submit" class="save-btn">💾 Save</button>
-          <button type="button" class="cancel-btn" (click)="addingQuestion=false">❌ Cancel</button>
-        </div>
-      </form>
-    </div>
+        <input type="text" [(ngModel)]="newQuestion.option1" name="option1" placeholder="Option 1" required />
+        <input type="text" [(ngModel)]="newQuestion.option2" name="option2" placeholder="Option 2" required />
+        <input type="text" [(ngModel)]="newQuestion.option3" name="option3" placeholder="Option 3" required />
+        <input type="text" [(ngModel)]="newQuestion.option4" name="option4" placeholder="Option 4" required />
 
-    <!-- EDIT QUESTION FORM -->
-    <div *ngIf="editingQuestion" class="edit-container">
-      <h4>✏️ Edit Question</h4>
-      <form (ngSubmit)="updateQuestion()">
-        <input [(ngModel)]="editingQuestion.text" name="text" placeholder="Question text" required />
-        <input [(ngModel)]="editingQuestion.option1" name="option1" placeholder="Option 1" required />
-        <input [(ngModel)]="editingQuestion.option2" name="option2" placeholder="Option 2" required />
-        <input [(ngModel)]="editingQuestion.option3" name="option3" placeholder="Option 3" required />
-        <input [(ngModel)]="editingQuestion.option4" name="option4" placeholder="Option 4" required />
-        <input [(ngModel)]="editingQuestion.correctAnswer" name="correctAnswer" placeholder="Correct Answer" required />
+        <input type="text" [(ngModel)]="newQuestion.correctAnswer" name="correctAnswer" placeholder="Correct Answer" required />
 
-        <div class="buttons">
-          <button type="submit" class="save-btn">💾 Update</button>
-          <button type="button" class="cancel-btn" (click)="cancelQuestionEdit()">❌ Cancel</button>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-save">💾 Save</button>
+          <button type="button" class="btn btn-cancel" (click)="toggleAddQuestion()">❌ Cancel</button>
         </div>
       </form>
     </div>
